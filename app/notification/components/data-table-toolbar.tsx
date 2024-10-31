@@ -21,10 +21,10 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 		<div className="flex items-center justify-between">
 			<div className="flex flex-1 items-center space-x-2">
 				<Input
-					placeholder="Filter group..."
-					value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
+					placeholder="Filter notification..."
+					value={(table.getColumn('message')?.getFilterValue() as string) ?? ''}
 					onChange={(event) =>
-						table.getColumn('name')?.setFilterValue(event.target.value)
+						table.getColumn('message')?.setFilterValue(event.target.value)
 					}
 					className="h-8 w-[150px] lg:w-[250px]"
 				/>
@@ -40,10 +40,10 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 				)}
 			</div>
 			<div className="flex gap-2">
-				<Link href="/group/edit">
+				<Link href="/notification/edit">
 					<Button variant="outline" size="sm" className="ml-auto h-8 flex">
 						<PlusCircle className="mr-2 h-4 w-4" />
-						Add new
+						Send notification to all users
 					</Button>
 				</Link>
 				<DataTableViewOptions table={table} />

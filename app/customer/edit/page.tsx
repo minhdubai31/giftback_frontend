@@ -34,12 +34,12 @@ import { getGroup } from '@/services/groupService'; // Changed from getBrand to 
 
 const formSchema = z.object({
 	id: z.number(),
-	username: z.string().min(1, "This is required field"),
-	name: z.string().min(1, "This is required field"),
+	username: z.string().min(1, 'This is required field'),
+	name: z.string().min(1, 'This is required field'),
 	role: z.string(),
 	groupId: z.string(),
 	wallet: z.string(),
-	password: z.string().min(1, "This is required field")
+	password: z.string().min(1, 'This is required field'),
 });
 
 let groupsData: any = [];
@@ -61,6 +61,7 @@ export default function EditPage() {
 			role: data?.role ?? '',
 			groupId: data?.group?.id?.toString() ?? '',
 			wallet: data?.wallet?.balance.toString() ?? '',
+			password: '',
 		},
 	});
 
@@ -73,13 +74,13 @@ export default function EditPage() {
 				authProvider: undefined,
 				role: undefined,
 				group: {
-					id: values.groupId == "" ? undefined : Number(values.groupId),
-					name: undefined
+					id: values.groupId == '' ? undefined : Number(values.groupId),
+					name: undefined,
 				},
 				notifications: null,
 				createdAt: undefined,
 				updatedAt: undefined,
-				password: values.password
+				password: values.password,
 			};
 			await putCustomer(data);
 			toast.success('Customer updated successfully.');
@@ -171,7 +172,11 @@ export default function EditPage() {
 									<FormItem>
 										<FormLabel>Password</FormLabel>
 										<FormControl>
-											<Input placeholder="Password" type='password' {...field} />
+											<Input
+												placeholder="Password"
+												type="password"
+												{...field}
+											/>
 										</FormControl>
 										<FormMessage className="text-xs" />
 									</FormItem>

@@ -27,10 +27,12 @@ export const getCustomers = () => {
 
 export const putCustomer = async (data: Customer) => {
 	const id = data.id == 0 ? '' : data.id;
+	if (!data.group?.id) {
+		data.group = undefined;
+	}
 	if (id) {
 		await axios.put(PUT_API_URL + id, data);
 	} else {
-        console.log(data)
 		await axios.post(POST_API_URL, data);
 	}
 };

@@ -10,6 +10,7 @@ import { ProgramContextProvider } from '@/context/programContext';
 import { NetworkContextProvider } from '@/context/networkContext';
 import { CustomerContextProvider } from '@/context/customerContext';
 import { GroupContextProvider } from '@/context/groupContext';
+import { NotificationContextProvider } from '@/context/notificationContext';
 
 export default function RootLayout({
 	children,
@@ -41,7 +42,9 @@ export default function RootLayout({
 							<NetworkContextProvider>
 								<CustomerContextProvider>
 									<GroupContextProvider>
-										<Layout>{children}</Layout>
+										<NotificationContextProvider>
+											<Layout>{children}</Layout>
+										</NotificationContextProvider>
 									</GroupContextProvider>
 								</CustomerContextProvider>
 							</NetworkContextProvider>

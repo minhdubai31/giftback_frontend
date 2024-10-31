@@ -5,10 +5,13 @@ import { dateStringToDate } from '@/constant/common';
 export const groupSchema = z.object({
 	id: z.number(),
 	name: z.string(),
-	owner: customerSchema,
+	owner: z.object({
+		id: z.number().nullable().optional(),
+		name: z.string().nullable().optional()
+	}),
 	users: z.array(customerSchema.nullable().optional()).nullable().optional(),
-	createdAt: dateStringToDate,
-	updatedAt: dateStringToDate,
+	createdAt: dateStringToDate.nullable().optional(),
+	updatedAt: dateStringToDate.nullable().optional(),
 });
 
 export type Group = z.infer<typeof groupSchema>;

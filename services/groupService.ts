@@ -18,7 +18,6 @@ export const getGroup = () => {
 	return useSWR(GET_API_URL, fetcher, {
 		onSuccess: (data) => {
 			setGroupsData(data);
-			console.log(data)
 		},
 		onError: (error) => {
 			console.log(error);
