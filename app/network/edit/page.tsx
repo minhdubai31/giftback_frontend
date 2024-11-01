@@ -19,6 +19,7 @@ import { useNetworkContext } from '@/context/networkContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { putAffiliateNetwork } from '@/services/networkService';
 import { toast } from 'sonner';
+import { Separator } from '@/components/ui/separator';
 
 const formSchema = z.object({
 	id: z.number(),
@@ -29,6 +30,7 @@ const formSchema = z.object({
 		getCampaignApi: z.string().min(1, 'This field is required'),
 		getProductApi: z.string().min(1, 'This field is required'),
 		getTransactionApi: z.string().min(1, 'This field is required'),
+		getCampaignCommissionApi: z.string().min(1, 'This field is required'),
 	}),
 });
 
@@ -50,6 +52,7 @@ export default function EditPage() {
 				getCampaignApi: data?.apiMap?.getCampaignApi ?? '',
 				getProductApi: data?.apiMap?.getProductApi ?? '',
 				getTransactionApi: data?.apiMap?.getTransactionApi ?? '',
+				getCampaignCommissionApi: data?.apiMap?.getCampaignCommissionApi ?? '',
 			},
 		},
 	});
@@ -81,8 +84,8 @@ export default function EditPage() {
 					Back
 				</Button>
 				<Form {...form}>
-					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-						<div className="grid grid-flow-col grid-rows-3 gap-x-8 gap-y-2">
+					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+						<div className="grid grid-cols-2 gap-x-8 gap-y-2">
 							<FormField
 								control={form.control}
 								name="name"
@@ -122,6 +125,9 @@ export default function EditPage() {
 									</FormItem>
 								)}
 							/>
+						</div>
+						<Separator />
+						<div className="grid grid-cols-2 gap-x-8 gap-y-2">
 							<FormField
 								control={form.control}
 								name="apiMap.getCampaignApi"
@@ -154,6 +160,19 @@ export default function EditPage() {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Get transaction API</FormLabel>
+										<FormControl>
+											<Input placeholder="API" {...field} />
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="apiMap.getCampaignCommissionApi"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Get campaign commission API</FormLabel>
 										<FormControl>
 											<Input placeholder="API" {...field} />
 										</FormControl>

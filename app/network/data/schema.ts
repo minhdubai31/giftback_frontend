@@ -2,14 +2,15 @@ import { z } from 'zod';
 
 export const affiliateNetworkSchema = z.object({
 	id: z.number(),
-	name: z.string(),
-	url: z.string(),
-	authorizeToken: z.string(),
+	name: z.string().optional(),
+	url: z.string().optional(),
+	authorizeToken: z.string().optional(),
 	apiMap: z.object({
-		getCampaignApi: z.string(),
-		getProductApi: z.string(),
-		getTransactionApi: z.string(),
-	}),
+		getCampaignApi: z.string().nullable().optional(),
+		getProductApi: z.string().nullable().optional(),
+		getTransactionApi: z.string().nullable().optional(),
+		getCampaignCommissionApi: z.string().nullable().optional(),
+	}).optional().nullable(),
 });
 
 export type AffiliateNetwork = z.infer<typeof affiliateNetworkSchema>;
