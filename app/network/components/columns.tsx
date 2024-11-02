@@ -65,9 +65,10 @@ export const columns: ColumnDef<AffiliateNetwork>[] = [
       return (
         <div className="flex space-x-2">
           <ul className="max-w-[500px] font-medium">
-            <li>Get campaign API: <span className="text-zinc-500">{row.original.apiMap.getCampaignApi}</span></li>
-            <li>Get product API: <span className="text-zinc-500">{row.original.apiMap.getProductApi}</span></li>
-            <li>Get transaction API: <span className="text-zinc-500">{row.original.apiMap.getTransactionApi}</span></li>
+            <li>Get campaign API: <span className="text-zinc-500">{row.original.apiMap?.getCampaignApi}</span></li>
+            <li>Get product API: <span className="text-zinc-500">{row.original.apiMap?.getProductApi}</span></li>
+            <li>Get transaction API: <span className="text-zinc-500">{row.original.apiMap?.getTransactionApi}</span></li>
+            <li>Get campaign comission API: <span className="text-zinc-500">{row.original.apiMap?.getCampaignCommissionApi}</span></li>
           </ul>
         </div>
       )

@@ -8,6 +8,24 @@ import { DataTableRowActions } from "./data-table-row-actions"
 
 export const columns: ColumnDef<AffiliateProgram>[] = [
   {
+    accessorKey: "logo",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Logo" />
+    ),
+    meta: "Logo",
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <img 
+            src={row.original.logo || 'https://placehold.co/100x100?text=No%20image'}
+            alt="Program Logo"
+            className="h-[100px] w-[100px] object-contain"
+          />
+        </div>
+      )
+    },
+  },
+  {
     accessorKey: "brand",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Brand" />
@@ -16,7 +34,7 @@ export const columns: ColumnDef<AffiliateProgram>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
+          <span className="max-w-[200px] font-medium">
             {row.original.brand.name}
           </span>
         </div>
@@ -32,7 +50,7 @@ export const columns: ColumnDef<AffiliateProgram>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
+          <span className="max-w-[200px] font-medium">
             {row.getValue("programName")}
           </span>
         </div>
@@ -48,8 +66,8 @@ export const columns: ColumnDef<AffiliateProgram>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("commissionRate")}
+          <span className="max-w-[300px] text-ellipsis font-medium line-clamp-3">
+            <div dangerouslySetInnerHTML={{ __html: row.getValue("commissionRate") }} />
           </span>
         </div>
       )
@@ -80,7 +98,7 @@ export const columns: ColumnDef<AffiliateProgram>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[100px] truncate text-ellipsis font-medium">
+          <span className="max-w-[200px] truncate text-ellipsis font-medium">
             {row.getValue("programUrl")}
           </span>
         </div>
@@ -96,8 +114,24 @@ export const columns: ColumnDef<AffiliateProgram>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
-          <span className="max-w-[100px] truncate text-ellipsis font-medium">
-            {row.original.validFrom.toLocaleDateString()} - {row.original.validUntil.toLocaleDateString()}
+          <span className="max-w-fit truncate text-ellipsis font-medium">
+            {row.original.validFrom?.toLocaleDateString()} - {row.original.validUntil?.toLocaleDateString()}
+          </span>
+        </div>
+      )
+    },
+  },
+  {
+    accessorKey: "affiliateNetwork",
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Affiliate Network" />
+    ),
+    meta: "Affiliate Network",
+    cell: ({ row }) => {
+      return (
+        <div className="flex space-x-2">
+          <span className="max-w-fit truncate text-ellipsis font-medium">
+            {row.original.affiliateNetwork?.name}
           </span>
         </div>
       )
