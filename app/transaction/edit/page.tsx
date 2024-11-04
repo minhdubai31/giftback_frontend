@@ -135,7 +135,7 @@ export default function EditPage() {
 															key={user.id}
 															value={user.id.toString()}
 														>
-															{user.name}
+															{user.username}
 														</SelectItem>
 													))}
 												</SelectContent>

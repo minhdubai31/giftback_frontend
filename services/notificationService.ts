@@ -24,7 +24,6 @@ export const getNotification = () => {
 };
 
 export const putNotification = async (data: string) => {
-	console.log(data);
 	await axios.post(POST_API_URL, data, {
 		headers: {
 			'Content-Type': 'application/json',

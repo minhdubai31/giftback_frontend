@@ -39,7 +39,10 @@ const formSchema = z.object({
 	role: z.string(),
 	groupId: z.string(),
 	wallet: z.string(),
+	walletId: z.number(),
 	password: z.string().min(1, 'This is required field'),
+	bankName: z.string(),
+	bankAccountNumber: z.string(),
 });
 
 let groupsData: any = [];
@@ -60,8 +63,11 @@ export default function EditPage() {
 			name: data?.name ?? '',
 			role: data?.role ?? '',
 			groupId: data?.group?.id?.toString() ?? '',
+			walletId: data?.wallet?.id,
 			wallet: data?.wallet?.balance.toString() ?? '',
-			password: '',
+			password: id ? 'default' : '',
+			bankName: data?.bankName ?? '',
+			bankAccountNumber: data?.bankAccountNumber ?? '',
 		},
 	});
 
@@ -81,6 +87,12 @@ export default function EditPage() {
 				createdAt: undefined,
 				updatedAt: undefined,
 				password: values.password,
+				bankName: values.bankName,
+				bankAccountNumber: values.bankAccountNumber,
+				wallet: {
+					id: values.walletId ?? undefined,
+					balance: Number(values.wallet)
+				}
 			};
 			await putCustomer(data);
 			toast.success('Customer updated successfully.');
@@ -165,7 +177,7 @@ export default function EditPage() {
 									</FormItem>
 								)}
 							/>
-							<FormField
+							{!id && <FormField
 								control={form.control}
 								name="password"
 								render={({ field }) => (
@@ -177,6 +189,45 @@ export default function EditPage() {
 												type="password"
 												{...field}
 											/>
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>}
+							<FormField
+								control={form.control}
+								name="bankName"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Bank Name</FormLabel>
+										<FormControl>
+											<Input placeholder="Bank Name" {...field} />
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="bankAccountNumber" 
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Bank Account Number</FormLabel>
+										<FormControl>
+											<Input placeholder="Bank Account Number" {...field} />
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+														<FormField
+								control={form.control}
+								name="wallet"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Wallet Balance</FormLabel>
+										<FormControl>
+											<Input placeholder="Wallet Balance" type="number" {...field} />
 										</FormControl>
 										<FormMessage className="text-xs" />
 									</FormItem>

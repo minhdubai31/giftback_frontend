@@ -12,22 +12,22 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { brandSchema } from '../data/schema';
+import { cashbackSchema } from '../data/schema';
 import Link from 'next/link';
-import { useBrandContext } from '@/context/brandContext';
+import { useCashbackContext } from '@/context/cashbackContext';
 
 interface DataTableRowActionsProps<TData> {
 	row: Row<TData>;
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-	const { setSelected, setShowConfirm } = useBrandContext();
+	const { setSelected, setShowConfirm } = useCashbackContext();
 	const onDeleteSelect = (id: number) => {
 		setSelected(id);
 		setShowConfirm(true);
 	};
 
-	const brand = brandSchema.parse(row.original);
+	const cashback = cashbackSchema.parse(row.original);
 
 	return (
 		<DropdownMenu>
@@ -38,16 +38,7 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent align="end" className="w-[160px]">
-				<Link
-					href={{
-						pathname: '/brand/edit',
-						query: { id: brand.id },
-					}}
-				>
-					<DropdownMenuItem>Edit</DropdownMenuItem>
-				</Link>
-				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={() => onDeleteSelect(brand.id)}>
+				<DropdownMenuItem onClick={() => onDeleteSelect(cashback.id)}>
 					Delete
 				</DropdownMenuItem>
 			</DropdownMenuContent>

@@ -12,6 +12,8 @@ import { CustomerContextProvider } from '@/context/customerContext';
 import { GroupContextProvider } from '@/context/groupContext';
 import { NotificationContextProvider } from '@/context/notificationContext';
 import { TransactionContextProvider } from '@/context/transactionContext';
+import { PayoutContextProvider } from '@/context/payoutContext';
+import { CashbackContextProvider } from '@/context/cashbackContext';
 
 export default function RootLayout({
 	children,
@@ -45,7 +47,11 @@ export default function RootLayout({
 									<GroupContextProvider>
 										<NotificationContextProvider>
 											<TransactionContextProvider>
-												<Layout>{children}</Layout>
+												<PayoutContextProvider>
+													<CashbackContextProvider>
+														<Layout>{children}</Layout>
+													</CashbackContextProvider>
+												</PayoutContextProvider>
 											</TransactionContextProvider>
 										</NotificationContextProvider>
 									</GroupContextProvider>

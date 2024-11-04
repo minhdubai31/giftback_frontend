@@ -143,7 +143,7 @@ export default function Layout({
 								onClick={() => handleTabClick('Payout')}
 							>
 								<HandCoins className="h-4 w-4" />
-								Payout
+								Payout Request
 							</Link>
 							<Link
 								href="/transaction"
@@ -284,7 +284,7 @@ export default function Layout({
 									onClick={() => handleTabClick('Payout')}
 								>
 									<HandCoins className="h-5 w-5" />
-									Payout
+									Payout Request
 								</Link>
 								<Link
 									href="/transaction"

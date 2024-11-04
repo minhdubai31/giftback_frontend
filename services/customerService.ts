@@ -30,6 +30,7 @@ export const putCustomer = async (data: Customer) => {
 	if (!data.group?.id) {
 		data.group = undefined;
 	}
+	console.log(data)
 	if (id) {
 		await axios.put(PUT_API_URL + id, data);
 	} else {

@@ -5,11 +5,11 @@ import { Table } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { DataTableViewOptions } from '@/app/network/components/data-table-view-options';
 
 import { PlusCircle, RefreshCcw } from 'lucide-react';
 import Link from 'next/link';
-import { updateTransactionFromNetwork } from '@/services/transactionService';
+import { DataTableViewOptions } from './data-table-view-options';
+import { updateCashbackFromNetwork } from '@/services/cashbackService';
 import { toast } from 'sonner';
 import axios from 'axios';
 
@@ -19,10 +19,11 @@ interface DataTableToolbarProps<TData> {
 
 export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
 	const isFiltered = table.getState().columnFilters.length > 0;
-	const updateTransaction = async () => {
+
+	const updateCashback = async () => {
 		try {
-			await updateTransactionFromNetwork();
-			toast.success('Transactions updated successfully.');
+			await updateCashbackFromNetwork();
+			toast.success('Cashbacks updated successfully.');
 		} catch (error) {
 			toast.error('Uh oh! Something went wrong.', {
 				description: axios.isAxiosError(error)
@@ -30,16 +31,16 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 					: `Unexpected error: ${error}`,
 			});
 		}
-	};
+	}
 
 	return (
 		<div className="flex items-center justify-between">
 			<div className="flex flex-1 items-center space-x-2">
 				<Input
-					placeholder="Filter transaction..."
-					value={(table.getColumn('program')?.getFilterValue() as string) ?? ''}
+					placeholder="Filter by username..."
+					value={(table.getColumn('username')?.getFilterValue() as string) ?? ''}
 					onChange={(event) =>
-						table.getColumn('name')?.setFilterValue(event.target.value)
+						table.getColumn('username')?.setFilterValue(event.target.value)
 					}
 					className="h-8 w-[150px] lg:w-[250px]"
 				/>
@@ -55,16 +56,11 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 				)}
 			</div>
 			<div className="flex gap-2">
-				<Button
-					onClick={updateTransaction}
-					variant="outline"
-					size="sm"
-					className="ml-auto h-8 flex"
-				>
+				<Button onClick={updateCashback} variant="outline" size="sm" className="ml-auto h-8 flex">
 					<RefreshCcw className="mr-2 h-4 w-4" />
 					Update from affiliate networks
 				</Button>
-				<Link href="/transaction/edit">
+				<Link href="/cashback/edit">
 					<Button variant="outline" size="sm" className="ml-auto h-8 flex">
 						<PlusCircle className="mr-2 h-4 w-4" />
 						Add new

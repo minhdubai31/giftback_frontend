@@ -7,7 +7,6 @@ export const affiliateNetworkSchema = z.object({
 	authorizeToken: z.string().optional(),
 	apiMap: z.object({
 		getCampaignApi: z.string().nullable().optional(),
-		getProductApi: z.string().nullable().optional(),
 		getTransactionApi: z.string().nullable().optional(),
 		getCampaignCommissionApi: z.string().nullable().optional(),
 	}).optional().nullable(),

@@ -51,11 +51,9 @@ const formSchema = z.object({
 });
 
 export default function EditPage() {
-	getBrand();
 	getAffiliateNetwork();
 	const router = useRouter();
 	const { programsData } = useProgramContext();
-	const { brandsData } = useBrandContext();
 	const { networksData } = useNetworkContext();
 	const searchParams = useSearchParams();
 	const id = searchParams.get('id');
@@ -68,7 +66,7 @@ export default function EditPage() {
 		defaultValues: {
 			id: data?.id ?? 0,
 			programName: data?.programName ?? '',
-			commissionRate: data?.commissionRate.toString() ?? '',
+			commissionRate: data?.commissionRate?.toString() ?? '',
 			terms: data?.terms ?? '',
 			programUrl: data?.programUrl ?? '',
 			affiliateNetworkId: data?.affiliateNetwork?.id.toString() ?? '',
@@ -118,36 +116,6 @@ export default function EditPage() {
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 						<div className="gap-x-8 space-y-2">
-							<FormField
-								control={form.control}
-								name="brandId"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Brand</FormLabel>
-										<FormControl>
-											<Select
-												onValueChange={field.onChange}
-												defaultValue={field.value.toString()}
-											>
-												<SelectTrigger>
-													<SelectValue placeholder="Select brand" />
-												</SelectTrigger>
-												<SelectContent>
-													{brandsData?.map((brand: Brand) => (
-														<SelectItem
-															key={brand.id}
-															value={brand.id.toString()}
-														>
-															{brand.name}
-														</SelectItem>
-													))}
-												</SelectContent>
-											</Select>
-										</FormControl>
-										<FormMessage className="text-xs" />
-									</FormItem>
-								)}
-							/>
 							<FormField
 								control={form.control}
 								name="affiliateNetworkId"

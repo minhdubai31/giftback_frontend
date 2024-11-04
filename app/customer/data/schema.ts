@@ -17,6 +17,8 @@ export const customerSchema = z.object({
 		.nullable().optional(),
 	notifications: z.array(z.object({})).nullable().optional(),
 	wallet: walletSchema.nullable().optional(),
+	bankName: z.string().nullable().optional(),
+	bankAccountNumber: z.string().nullable().optional(),
 	createdAt: dateStringToDate.nullable().optional(),
 	updatedAt: dateStringToDate.nullable().optional(),
 	password: z.string().nullable().optional()

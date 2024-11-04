@@ -28,7 +28,6 @@ const formSchema = z.object({
 	authorizeToken: z.string().min(1, 'This field is required'),
 	apiMap: z.object({
 		getCampaignApi: z.string().min(1, 'This field is required'),
-		getProductApi: z.string().min(1, 'This field is required'),
 		getTransactionApi: z.string().min(1, 'This field is required'),
 		getCampaignCommissionApi: z.string().min(1, 'This field is required'),
 	}),
@@ -50,7 +49,6 @@ export default function EditPage() {
 			authorizeToken: data?.authorizeToken ?? '',
 			apiMap: {
 				getCampaignApi: data?.apiMap?.getCampaignApi ?? '',
-				getProductApi: data?.apiMap?.getProductApi ?? '',
 				getTransactionApi: data?.apiMap?.getTransactionApi ?? '',
 				getCampaignCommissionApi: data?.apiMap?.getCampaignCommissionApi ?? '',
 			},
@@ -134,19 +132,6 @@ export default function EditPage() {
 								render={({ field }) => (
 									<FormItem>
 										<FormLabel>Get campaign API</FormLabel>
-										<FormControl>
-											<Input placeholder="API" {...field} />
-										</FormControl>
-										<FormMessage className="text-xs" />
-									</FormItem>
-								)}
-							/>
-							<FormField
-								control={form.control}
-								name="apiMap.getProductApi"
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Get product API</FormLabel>
 										<FormControl>
 											<Input placeholder="API" {...field} />
 										</FormControl>
