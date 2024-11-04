@@ -40,7 +40,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 				)}
 			</div>
 			<div className="flex gap-2">
-				<Link href="/brand/edit">
+				<Link href="/transaction/edit">
 					<Button variant="outline" size="sm" className="ml-auto h-8 flex">
 						<PlusCircle className="mr-2 h-4 w-4" />
 						Add new

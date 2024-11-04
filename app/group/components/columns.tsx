@@ -46,6 +46,20 @@ export const columns: ColumnDef<Group>[] = [
 		},
 	},
 	{
+		accessorKey: 'walletBalance',
+		header: ({ column }) => <DataTableColumnHeader column={column} title="Wallet Balance" />,
+		meta: "Wallet Balance",
+		cell: ({ row }) => {
+			return (
+				<div className="flex space-x-2">
+					<span className="max-w-[200px] truncate font-medium">
+						{row.original.walletBalance?.toLocaleString('vi-VN') + ' đ'}
+					</span>
+				</div>
+			);
+		},
+	},
+	{
 		accessorKey: 'createdAt',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Created At" />,
 		meta: "Created At",

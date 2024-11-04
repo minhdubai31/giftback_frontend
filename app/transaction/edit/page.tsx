@@ -10,47 +10,86 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
-import { Brand, brandSchema } from '../data/schema';
+import { Transaction, transactionSchema } from '../data/schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, CalendarIcon } from 'lucide-react';
 import { useNetworkContext } from '@/context/networkContext';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { putAffiliateNetwork } from '@/services/networkService';
 import { toast } from 'sonner';
-import { useBrandContext } from '@/context/brandContext';
-import { putBrand } from '@/services/brandService';
+import { useTransactionContext } from '@/context/transactionContext';
+import { putTransaction } from '@/services/transactionService';
 import { Textarea } from '@/components/ui/textarea';
+import { format } from 'date-fns';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import { cn } from '@/lib/utils';
+import {
+	Select,
+	SelectContent,
+	SelectItem,
+	SelectTrigger,
+	SelectValue,
+} from '@/components/ui/select';
+import { getCustomers } from '@/services/customerService';
+import { useCustomerContext } from '@/context/customerContext';
+import { useProgramContext } from '@/context/programContext';
+import { getAffiliateProgram } from '@/services/programService';
+import { Customer } from '@/app/customer/data/schema';
+import { AffiliateProgram } from '@/app/program/data/schema';
 
 const formSchema = z.object({
 	id: z.number(),
-	name: z.string().min(1, 'This field is required'),
-	description: z.string().min(1, 'This field is required'),
-	logoPath: z.string().min(1, 'This field is required'),
+	userId: z.string().min(1, 'This is required field'),
+	programId: z.string().min(1, 'This is required field'),
+	totalAmount: z.string(),
+	cashbackAmount: z.string(),
+	transactionDate: z.date(),
 });
 
 export default function EditPage() {
+	getCustomers();
+	getAffiliateProgram();
 	const router = useRouter();
-	const { brandsData } = useBrandContext();
+	const { programsData } = useProgramContext();
+	const { customersData } = useCustomerContext();
+	const { transactionsData } = useTransactionContext();
 	const searchParams = useSearchParams();
 	const id = searchParams.get('id');
-	const data = brandsData?.find((item: Brand) => item.id.toString() == id);
+	const data: Transaction = transactionsData?.find(
+		(item: Transaction) => item.id.toString() == id
+	);
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			id: data?.id ?? 0,
-			name: data?.name ?? '',
-			description: data?.description ?? '',
-			logoPath: data?.logoPath ?? '',
+			userId: data?.user?.id.toString() ?? '',
+			programId: data?.program?.id.toString() ?? '',
+			totalAmount: data?.totalAmount?.toString() ?? '0',
+			cashbackAmount: data?.cashbackAmount?.toString() ?? '0',
+			transactionDate: data?.transactionDate ?? new Date(),
 		},
 	});
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			await putBrand(values);
-			toast.success('Network updated successfully.');
+			const transaction: Transaction = {
+				id: values.id,
+				user: {
+					id: Number(values.userId),
+				},
+				program: {
+					id: Number(values.programId),
+				},
+				totalAmount: Number(values.totalAmount),
+				cashbackAmount: Number(values.cashbackAmount),
+				transactionDate: values.transactionDate,
+			};
+			await putTransaction(transaction);
+			toast.success('Transaction updated successfully.');
 			router.back();
 		} catch (error) {
 			toast.error('Uh oh! Something went wrong.', {
@@ -78,12 +117,29 @@ export default function EditPage() {
 						<div className="space-y-2">
 							<FormField
 								control={form.control}
-								name="name"
+								name="userId"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Network name</FormLabel>
+										<FormLabel>User</FormLabel>
 										<FormControl>
-											<Input placeholder="Network name" {...field} />
+											<Select
+												onValueChange={field.onChange}
+												defaultValue={field.value.toString()}
+											>
+												<SelectTrigger>
+													<SelectValue placeholder="Select user" />
+												</SelectTrigger>
+												<SelectContent>
+													{customersData?.map((user: Customer) => (
+														<SelectItem
+															key={user.id}
+															value={user.id.toString()}
+														>
+															{user.name}
+														</SelectItem>
+													))}
+												</SelectContent>
+											</Select>
 										</FormControl>
 										<FormMessage className="text-xs" />
 									</FormItem>
@@ -91,12 +147,31 @@ export default function EditPage() {
 							/>
 							<FormField
 								control={form.control}
-								name="description"
+								name="programId"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Description</FormLabel>
+										<FormLabel>Program</FormLabel>
 										<FormControl>
-											<Textarea placeholder="Description" {...field} />
+											<Select
+												onValueChange={field.onChange}
+												defaultValue={field.value.toString()}
+											>
+												<SelectTrigger>
+													<SelectValue placeholder="Select program" />
+												</SelectTrigger>
+												<SelectContent>
+													{programsData?.map(
+														(program: AffiliateProgram) => (
+															<SelectItem
+																key={program.id}
+																value={program.id.toString()}
+															>
+																{program.programName}
+															</SelectItem>
+														)
+													)}
+												</SelectContent>
+											</Select>
 										</FormControl>
 										<FormMessage className="text-xs" />
 									</FormItem>
@@ -104,12 +179,77 @@ export default function EditPage() {
 							/>
 							<FormField
 								control={form.control}
-								name="logoPath"
+								name="totalAmount"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel>Logo URL</FormLabel>
+										<FormLabel>Total Amount</FormLabel>
 										<FormControl>
-											<Input placeholder="Token" {...field} />
+											<Input
+												type="number"
+												placeholder="Total Amount"
+												{...field}
+											/>
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="cashbackAmount"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Cashback Amount</FormLabel>
+										<FormControl>
+											<Input
+												type="number"
+												placeholder="Cashback Amount"
+												{...field}
+											/>
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="transactionDate"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Transaction Date</FormLabel>
+										<FormControl>
+											<Popover>
+												<PopoverTrigger asChild>
+													<FormControl>
+														<Button
+															variant={'outline'}
+															className={cn(
+																'pl-3 text-left font-normal w-full',
+																!field.value &&
+																	'text-muted-foreground'
+															)}
+														>
+															{field.value ? (
+																format(field.value, 'PPP')
+															) : (
+																<span>Pick a date</span>
+															)}
+															<CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+														</Button>
+													</FormControl>
+												</PopoverTrigger>
+												<PopoverContent
+													className="w-auto p-0"
+													align="start"
+												>
+													<Calendar
+														mode="single"
+														selected={field.value}
+														onSelect={field.onChange}
+														initialFocus
+													/>
+												</PopoverContent>
+											</Popover>
 										</FormControl>
 										<FormMessage className="text-xs" />
 									</FormItem>

@@ -4,8 +4,8 @@ import { dateStringToDate } from '@/constant/common';
 
 export const customerSchema = z.object({
 	id: z.number(),
-	username: z.string(),
-	name: z.string(),
+	username: z.string().nullable().optional(),
+	name: z.string().nullable().optional(),
 	role: z.string().nullable().optional(),
 	authProvider: z.string().nullable().optional(),
 	group: z

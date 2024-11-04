@@ -67,7 +67,6 @@ export default function EditPage() {
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			id: data?.id ?? 0,
-			brandId: data?.brand.id.toString() ?? '',
 			programName: data?.programName ?? '',
 			commissionRate: data?.commissionRate.toString() ?? '',
 			terms: data?.terms ?? '',
@@ -82,12 +81,6 @@ export default function EditPage() {
 		try {
 			const data: AffiliateProgram = {
 				id: values.id,
-				brand: {
-					id: Number(values.brandId),
-					name: '',
-					description: '',
-					logoPath: '',
-				},
 				programName: values.programName,
 				commissionRate: values.commissionRate,
 				terms: values.terms,

@@ -7,9 +7,10 @@ export const groupSchema = z.object({
 	name: z.string(),
 	owner: z.object({
 		id: z.number().nullable().optional(),
-		name: z.string().nullable().optional()
+		name: z.string().nullable().optional(),
 	}),
 	users: z.array(customerSchema.nullable().optional()).nullable().optional(),
+	walletBalance: z.number().optional().nullable(),
 	createdAt: dateStringToDate.nullable().optional(),
 	updatedAt: dateStringToDate.nullable().optional(),
 });

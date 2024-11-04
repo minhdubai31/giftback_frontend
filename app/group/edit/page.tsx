@@ -34,6 +34,7 @@ import { getCustomers } from '@/services/customerService'; // Changed from getBr
 const formSchema = z.object({
 	id: z.number(),
 	name: z.string().min(1, "This is required field"),
+	walletBalance: z.string(),
 	ownerId: z.string(),
 });
 
@@ -52,7 +53,8 @@ export default function EditPage() {
 		defaultValues: {
 			id: data?.id ?? 0,
 			name: data?.name ?? '',
-			ownerId: data?.owner?.id?.toString() ?? "0",
+			walletBalance: data?.walletBalance?.toString() ?? '0',
+			ownerId: data?.owner?.id?.toString() ?? "",
 		},
 	});
 
@@ -63,8 +65,8 @@ export default function EditPage() {
 				name: values.name,
 				owner: {
 					id: Number(values.ownerId),
-					name: undefined
 				},
+				walletBalance: Number(values.walletBalance),
 				createdAt: undefined,
 				updatedAt: undefined
 			};
@@ -133,6 +135,19 @@ export default function EditPage() {
 										<FormLabel>Name</FormLabel>
 										<FormControl>
 											<Input placeholder="Name" {...field} />
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="walletBalance"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Wallet Balance</FormLabel>
+										<FormControl>
+											<Input placeholder="Wallet Balance" type='number' {...field} />
 										</FormControl>
 										<FormMessage className="text-xs" />
 									</FormItem>

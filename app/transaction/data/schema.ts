@@ -10,8 +10,6 @@ export const transactionSchema = z.object({
 	totalAmount: z.number().nullable().optional(),
 	cashbackAmount: z.number().nullable().optional(),
 	transactionDate: dateStringToDate.nullable().optional(),
-	createdAt: dateStringToDate.nullable().optional(),
-	updatedAt: dateStringToDate.nullable().optional(),
 });
 
 export type Transaction = z.infer<typeof transactionSchema>;

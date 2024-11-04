@@ -10,6 +10,8 @@ import { PlusCircle, RefreshCcw } from 'lucide-react';
 import Link from 'next/link';
 import { DataTableViewOptions } from './data-table-view-options';
 import { updateAffiliateProgramFromNetwork } from '@/services/programService';
+import { toast } from 'sonner';
+import axios from 'axios';
 
 interface DataTableToolbarProps<TData> {
 	table: Table<TData>;
@@ -17,6 +19,19 @@ interface DataTableToolbarProps<TData> {
 
 export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>) {
 	const isFiltered = table.getState().columnFilters.length > 0;
+
+	const updateAffiliateProgram = async () => {
+		try {
+			await updateAffiliateProgramFromNetwork();
+			toast.success('Programs updated successfully.');
+		} catch (error) {
+			toast.error('Uh oh! Something went wrong.', {
+				description: axios.isAxiosError(error)
+					? error.response?.data?.message || 'An error occurred'
+					: `Unexpected error: ${error}`,
+			});
+		}
+	}
 
 	return (
 		<div className="flex items-center justify-between">
@@ -41,7 +56,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 				)}
 			</div>
 			<div className="flex gap-2">
-				<Button onClick={updateAffiliateProgramFromNetwork} variant="outline" size="sm" className="ml-auto h-8 flex">
+				<Button onClick={updateAffiliateProgram} variant="outline" size="sm" className="ml-auto h-8 flex">
 					<RefreshCcw className="mr-2 h-4 w-4" />
 					Update from affiliate networks
 				</Button>

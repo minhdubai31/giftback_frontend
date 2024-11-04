@@ -5,12 +5,11 @@ import { z } from 'zod';
 
 export const affiliateProgramSchema = z.object({
 	id: z.number(),
-	brand: brandSchema, 
 	logo: z.string().optional().nullable(),
-	programName: z.string(),
-	commissionRate: z.string(),
-	terms: z.string(),
-	programUrl: z.string(),
+	programName: z.string().nullable().optional(),
+	commissionRate: z.string().nullable().optional(),
+	terms: z.string().nullable().optional(),
+	programUrl: z.string().nullable().optional(),
 	affiliateNetwork: affiliateNetworkSchema.nullable().optional(),
 	validFrom: dateStringToDate.nullable().optional(),
 	validUntil: dateStringToDate.nullable().optional(),
