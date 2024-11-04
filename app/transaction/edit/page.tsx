@@ -1,0 +1,125 @@
+'use client';
+import { Button } from '@/components/ui/button';
+import {
+	FormField,
+	FormItem,
+	FormLabel,
+	FormControl,
+	FormMessage,
+	Form,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { z } from 'zod';
+import { Brand, brandSchema } from '../data/schema';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import axios from 'axios';
+import { ArrowLeft } from 'lucide-react';
+import { useNetworkContext } from '@/context/networkContext';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { putAffiliateNetwork } from '@/services/networkService';
+import { toast } from 'sonner';
+import { useBrandContext } from '@/context/brandContext';
+import { putBrand } from '@/services/brandService';
+import { Textarea } from '@/components/ui/textarea';
+
+const formSchema = z.object({
+	id: z.number(),
+	name: z.string().min(1, 'This field is required'),
+	description: z.string().min(1, 'This field is required'),
+	logoPath: z.string().min(1, 'This field is required'),
+});
+
+export default function EditPage() {
+	const router = useRouter();
+	const { brandsData } = useBrandContext();
+	const searchParams = useSearchParams();
+	const id = searchParams.get('id');
+	const data = brandsData?.find((item: Brand) => item.id.toString() == id);
+
+	const form = useForm<z.infer<typeof formSchema>>({
+		resolver: zodResolver(formSchema),
+		defaultValues: {
+			id: data?.id ?? 0,
+			name: data?.name ?? '',
+			description: data?.description ?? '',
+			logoPath: data?.logoPath ?? '',
+		},
+	});
+
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		try {
+			await putBrand(values);
+			toast.success('Network updated successfully.');
+			router.back();
+		} catch (error) {
+			toast.error('Uh oh! Something went wrong.', {
+				description: axios.isAxiosError(error)
+					? error.response?.data?.message || 'An error occurred'
+					: `Unexpected error: ${error}`,
+			});
+		}
+	}
+
+	return (
+		<>
+			<div className="h-full flex-1 flex-col space-y-8 p-2 md:flex">
+				<Button
+					variant="outline"
+					size="sm"
+					className="mr-auto h-8 flex"
+					onClick={() => router.back()}
+				>
+					<ArrowLeft className="mr-2 h-8 w-8" />
+					Back
+				</Button>
+				<Form {...form}>
+					<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+						<div className="space-y-2">
+							<FormField
+								control={form.control}
+								name="name"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Network name</FormLabel>
+										<FormControl>
+											<Input placeholder="Network name" {...field} />
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="description"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Description</FormLabel>
+										<FormControl>
+											<Textarea placeholder="Description" {...field} />
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+							<FormField
+								control={form.control}
+								name="logoPath"
+								render={({ field }) => (
+									<FormItem>
+										<FormLabel>Logo URL</FormLabel>
+										<FormControl>
+											<Input placeholder="Token" {...field} />
+										</FormControl>
+										<FormMessage className="text-xs" />
+									</FormItem>
+								)}
+							/>
+						</div>
+						<Button type="submit">Submit</Button>
+					</form>
+				</Form>
+			</div>
+		</>
+	);
+}

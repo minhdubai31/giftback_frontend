@@ -16,6 +16,7 @@ export const columns: ColumnDef<AffiliateNetwork>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Network name" />
     ),
+    meta: "Network name",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
@@ -31,6 +32,7 @@ export const columns: ColumnDef<AffiliateNetwork>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="URL" />
     ),
+    meta: "URL",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
@@ -46,6 +48,7 @@ export const columns: ColumnDef<AffiliateNetwork>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Token" />
     ),
+    meta: "Token",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
@@ -61,6 +64,7 @@ export const columns: ColumnDef<AffiliateNetwork>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Api mapping" />
     ),
+    meta: "Api mapping",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">

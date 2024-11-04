@@ -5,11 +5,10 @@ import { Table } from '@tanstack/react-table';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { DataTableViewOptions } from '@/app/network/components/data-table-view-options';
 
-import { PlusCircle, RefreshCcw } from 'lucide-react';
+import { PlusCircle } from 'lucide-react';
 import Link from 'next/link';
-import { DataTableViewOptions } from './data-table-view-options';
-import { updateAffiliateProgramFromNetwork } from '@/services/programService';
 
 interface DataTableToolbarProps<TData> {
 	table: Table<TData>;
@@ -22,10 +21,10 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 		<div className="flex items-center justify-between">
 			<div className="flex flex-1 items-center space-x-2">
 				<Input
-					placeholder="Filter program..."
-					value={(table.getColumn('programName')?.getFilterValue() as string) ?? ''}
+					placeholder="Filter transaction..."
+					value={(table.getColumn('program')?.getFilterValue() as string) ?? ''}
 					onChange={(event) =>
-						table.getColumn('programName')?.setFilterValue(event.target.value)
+						table.getColumn('name')?.setFilterValue(event.target.value)
 					}
 					className="h-8 w-[150px] lg:w-[250px]"
 				/>
@@ -41,11 +40,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 				)}
 			</div>
 			<div className="flex gap-2">
-				<Button onClick={updateAffiliateProgramFromNetwork} variant="outline" size="sm" className="ml-auto h-8 flex">
-					<RefreshCcw className="mr-2 h-4 w-4" />
-					Update from affiliate networks
-				</Button>
-				<Link href="/program/edit">
+				<Link href="/brand/edit">
 					<Button variant="outline" size="sm" className="ml-auto h-8 flex">
 						<PlusCircle className="mr-2 h-4 w-4" />
 						Add new

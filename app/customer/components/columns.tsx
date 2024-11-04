@@ -10,6 +10,7 @@ export const columns: ColumnDef<Customer>[] = [
 	{
 		accessorKey: 'id',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="ID" />,
+		meta: "ID",
 		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-2">
@@ -21,6 +22,7 @@ export const columns: ColumnDef<Customer>[] = [
 	{
 		accessorKey: 'username',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Username" />,
+		meta: "Username",
 		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-2">
@@ -34,6 +36,7 @@ export const columns: ColumnDef<Customer>[] = [
 	{
 		accessorKey: 'name',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
+		meta: "Name",
 		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-2">
@@ -45,6 +48,7 @@ export const columns: ColumnDef<Customer>[] = [
 	{
 		accessorKey: 'authProvider',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Auth Provider" />,
+		meta: "Auth Provider",
 		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-2">
@@ -58,6 +62,7 @@ export const columns: ColumnDef<Customer>[] = [
   	{
 		accessorKey: 'wallet.balance',
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Wallet balance" />,
+		meta: "Wallet balance",
 		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-2">

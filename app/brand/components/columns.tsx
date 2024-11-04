@@ -12,6 +12,7 @@ export const columns: ColumnDef<Brand>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Name" />
     ),
+    meta: "Name",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
@@ -27,6 +28,7 @@ export const columns: ColumnDef<Brand>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Description" />
     ),
+    meta: "Description",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
@@ -42,6 +44,7 @@ export const columns: ColumnDef<Brand>[] = [
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Logo URL" />
     ),
+    meta: "Logo URL",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
