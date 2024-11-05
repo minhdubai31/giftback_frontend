@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
-import { Cashback, cashbackSchema } from '../data/schema';
+import { Cashback } from '../data/schema'; // Removed unused import of cashbackSchema
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
@@ -19,12 +19,12 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { useCashbackContext } from '@/context/cashbackContext';
 import { putCashback } from '@/services/cashbackService';
-import { Textarea } from '@/components/ui/textarea';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
 
+// Define the form schema for validation
 const formSchema = z.object({
 	id: z.number(),
 	transactionId: z.string().min(1, "This is required field"),
@@ -49,6 +49,7 @@ export default function EditPage() {
 		},
 	});
 
+	// Function to handle form submission
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
 			const data: Cashback = {

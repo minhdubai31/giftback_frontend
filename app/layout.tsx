@@ -8,7 +8,7 @@ import { usePathname } from 'next/navigation';
 import { BrandContextProvider } from '@/context/brandContext';
 import { ProgramContextProvider } from '@/context/programContext';
 import { NetworkContextProvider } from '@/context/networkContext';
-import { CustomerContextProvider } from '@/context/customerContext';
+import { UserContextProvider } from '@/context/userContext';
 import { GroupContextProvider } from '@/context/groupContext';
 import { NotificationContextProvider } from '@/context/notificationContext';
 import { TransactionContextProvider } from '@/context/transactionContext';
@@ -43,7 +43,7 @@ export default function RootLayout({
 					<BrandContextProvider>
 						<ProgramContextProvider>
 							<NetworkContextProvider>
-								<CustomerContextProvider>
+								<UserContextProvider>
 									<GroupContextProvider>
 										<NotificationContextProvider>
 											<TransactionContextProvider>
@@ -55,7 +55,7 @@ export default function RootLayout({
 											</TransactionContextProvider>
 										</NotificationContextProvider>
 									</GroupContextProvider>
-								</CustomerContextProvider>
+								</UserContextProvider>
 							</NetworkContextProvider>
 						</ProgramContextProvider>
 					</BrandContextProvider>

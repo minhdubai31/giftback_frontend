@@ -27,6 +27,7 @@ export function DataTableColumnHeader<TData, TValue>({
   title,
   className,
 }: DataTableColumnHeaderProps<TData, TValue>) {
+  // If the column cannot be sorted, render the title without sorting options
   if (!column.getCanSort()) {
     return <div className={cn(className)}>{title}</div>
   }

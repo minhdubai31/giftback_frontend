@@ -8,12 +8,10 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
 import { cashbackSchema } from '../data/schema';
-import Link from 'next/link';
 import { useCashbackContext } from '@/context/cashbackContext';
 
 interface DataTableRowActionsProps<TData> {
@@ -22,11 +20,14 @@ interface DataTableRowActionsProps<TData> {
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
 	const { setSelected, setShowConfirm } = useCashbackContext();
+
+	// Function to handle delete action selection
 	const onDeleteSelect = (id: number) => {
 		setSelected(id);
 		setShowConfirm(true);
 	};
 
+	// Parse the original row data to match the cashback schema
 	const cashback = cashbackSchema.parse(row.original);
 
 	return (

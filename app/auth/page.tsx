@@ -1,7 +1,6 @@
 'use client';
 
-import axios from 'axios';
-import { useRouter } from 'next/navigation'; // Import useRouter from next/router
+import { useRouter } from 'next/navigation'; 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -16,9 +15,11 @@ import {
 	FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { login } from '@/services/authService'; // Import the new login function
+import { login } from '@/services/authService'; 
 import { toast } from 'sonner';
+import axios from 'axios';
 
+// Define the schema for form validation using Zod
 const formSchema = z.object({
 	username: z.string().min(3, {
 		message: 'Username must be at least 3 characters.',
@@ -30,7 +31,8 @@ const formSchema = z.object({
 
 function ProfileForm() {
 	const router = useRouter(); // Initialize the router
-	// 1. Define your form.
+
+	// Initialize the form with validation schema and default values
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -39,12 +41,11 @@ function ProfileForm() {
 		},
 	});
 
-	// 2. Define a submit handler.
-
+	// Handle form submission
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
 			await login(values.username, values.password); // Call the login function
-			router.replace('/'); // Redirect to home on successful login using Next.js router
+			router.replace('/'); // Redirect to home on successful login
 		} catch (error) {
 			toast.error('Uh oh! Something went wrong.', {
 				description: axios.isAxiosError(error)

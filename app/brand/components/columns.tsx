@@ -42,14 +42,14 @@ export const columns: ColumnDef<Brand>[] = [
   {
     accessorKey: "logoPath",
     header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Logo URL" />
+      <DataTableColumnHeader column={column} title="Logo" />
     ),
-    meta: "Logo URL",
+    meta: "Logo",
     cell: ({ row }) => {
       return (
         <div className="flex space-x-2">
           <span className="max-w-[100px] truncate text-ellipsis font-medium">
-            {row.getValue("logoPath")}
+            <img src={row.original.logoPath || "https://placehold.co/75x75?text=No%20image"} alt={row.original.name} />
           </span>
         </div>
       )

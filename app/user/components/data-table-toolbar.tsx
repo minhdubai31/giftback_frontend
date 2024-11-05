@@ -21,7 +21,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 		<div className="flex items-center justify-between">
 			<div className="flex flex-1 items-center space-x-2">
 				<Input
-					placeholder="Filter customer..."
+					placeholder="Filter user..."
 					value={(table.getColumn('username')?.getFilterValue() as string) ?? ''}
 					onChange={(event) =>
 						table.getColumn('username')?.setFilterValue(event.target.value)
@@ -40,7 +40,7 @@ export function DataTableToolbar<TData>({ table }: DataTableToolbarProps<TData>)
 				)}
 			</div>
 			<div className="flex gap-2">
-				<Link href="/customer/edit">
+				<Link href="/user/edit">
 					<Button variant="outline" size="sm" className="ml-auto h-8 flex">
 						<PlusCircle className="mr-2 h-4 w-4" />
 						Add new

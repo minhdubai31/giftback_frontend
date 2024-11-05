@@ -10,18 +10,15 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
-import { Transaction, transactionSchema } from '../data/schema';
+import { Transaction } from '../data/schema'; // Removed unused import of transactionSchema
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { ArrowLeft, CalendarIcon } from 'lucide-react';
-import { useNetworkContext } from '@/context/networkContext';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { putAffiliateNetwork } from '@/services/networkService';
 import { toast } from 'sonner';
 import { useTransactionContext } from '@/context/transactionContext';
 import { putTransaction } from '@/services/transactionService';
-import { Textarea } from '@/components/ui/textarea';
 import { format } from 'date-fns';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
@@ -33,11 +30,11 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { getCustomers } from '@/services/customerService';
-import { useCustomerContext } from '@/context/customerContext';
+import { getUsers } from '@/services/userService';
+import { useUserContext } from '@/context/userContext';
 import { useProgramContext } from '@/context/programContext';
 import { getAffiliateProgram } from '@/services/programService';
-import { Customer } from '@/app/customer/data/schema';
+import { User } from '@/app/user/data/schema';
 import { AffiliateProgram } from '@/app/program/data/schema';
 
 const formSchema = z.object({
@@ -50,11 +47,11 @@ const formSchema = z.object({
 });
 
 export default function EditPage() {
-	getCustomers();
-	getAffiliateProgram();
+	getUsers(); // Fetch users for the select input
+	getAffiliateProgram(); // Fetch affiliate programs for the select input
 	const router = useRouter();
 	const { programsData } = useProgramContext();
-	const { customersData } = useCustomerContext();
+	const { usersData } = useUserContext();
 	const { transactionsData } = useTransactionContext();
 	const searchParams = useSearchParams();
 	const id = searchParams.get('id');
@@ -130,7 +127,7 @@ export default function EditPage() {
 													<SelectValue placeholder="Select user" />
 												</SelectTrigger>
 												<SelectContent>
-													{customersData?.map((user: Customer) => (
+													{usersData?.map((user: User) => (
 														<SelectItem
 															key={user.id}
 															value={user.id.toString()}

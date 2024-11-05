@@ -8,12 +8,10 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
 import { payoutSchema } from '../data/schema';
-import Link from 'next/link';
 import { usePayoutContext } from '@/context/payoutContext';
 
 interface DataTableRowActionsProps<TData> {

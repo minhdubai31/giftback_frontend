@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { customerSchema } from '@/app/customer/data/schema';
+import { userSchema } from '@/app/user/data/schema';
 import { dateStringToDate } from '@/constant/common';
 
 export const groupSchema = z.object({
@@ -9,7 +9,7 @@ export const groupSchema = z.object({
 		id: z.number().nullable().optional(),
 		name: z.string().nullable().optional(),
 	}),
-	users: z.array(customerSchema.nullable().optional()).nullable().optional(),
+	users: z.array(userSchema.nullable().optional()).nullable().optional(),
 	walletBalance: z.number().optional().nullable(),
 	createdAt: dateStringToDate.nullable().optional(),
 	updatedAt: dateStringToDate.nullable().optional(),

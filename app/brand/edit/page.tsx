@@ -10,24 +10,23 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
-import { Brand, brandSchema } from '../data/schema';
+import { Brand } from '../data/schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { ArrowLeft } from 'lucide-react';
-import { useNetworkContext } from '@/context/networkContext';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { putAffiliateNetwork } from '@/services/networkService';
 import { toast } from 'sonner';
 import { useBrandContext } from '@/context/brandContext';
 import { putBrand } from '@/services/brandService';
 import { Textarea } from '@/components/ui/textarea';
 
+// Define the form schema for validation
 const formSchema = z.object({
 	id: z.number(),
 	name: z.string().min(1, 'This field is required'),
 	description: z.string().min(1, 'This field is required'),
-	logoPath: z.string().min(1, 'This field is required'),
+	logoPath: z.string(),
 });
 
 export default function EditPage() {
@@ -35,7 +34,8 @@ export default function EditPage() {
 	const { brandsData } = useBrandContext();
 	const searchParams = useSearchParams();
 	const id = searchParams.get('id');
-	const data = brandsData?.find((item: Brand) => item.id.toString() == id);
+	// Find the brand data based on the id from the search parameters
+	const data: Brand = brandsData?.find((item: Brand) => item.id.toString() == id);
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -47,6 +47,7 @@ export default function EditPage() {
 		},
 	});
 
+	// Function to handle form submission
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
 			await putBrand(values);
@@ -109,7 +110,7 @@ export default function EditPage() {
 									<FormItem>
 										<FormLabel>Logo URL</FormLabel>
 										<FormControl>
-											<Input placeholder="Token" {...field} />
+											<Input placeholder="Logo URL" {...field} />
 										</FormControl>
 										<FormMessage className="text-xs" />
 									</FormItem>

@@ -10,18 +10,15 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
-import { Payout, payoutSchema } from '../data/schema';
+import { Payout } from '../data/schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { ArrowLeft } from 'lucide-react';
-import { useNetworkContext } from '@/context/networkContext';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { putAffiliateNetwork } from '@/services/networkService';
 import { toast } from 'sonner';
 import { usePayoutContext } from '@/context/payoutContext';
 import { putPayout } from '@/services/payoutService';
-import { Textarea } from '@/components/ui/textarea';
 import {
 	Select,
 	SelectContent,
@@ -29,8 +26,8 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { useCustomerContext } from '@/context/customerContext';
-import { getCustomers } from '@/services/customerService';
+import { useUserContext } from '@/context/userContext';
+import { getUsers } from '@/services/userService';
 
 const formSchema = z.object({
 	id: z.number(),
@@ -40,9 +37,9 @@ const formSchema = z.object({
 });
 
 export default function EditPage() {
-	getCustomers();
+	getUsers(); // Fetch users data
 	const router = useRouter();
-	const { customersData } = useCustomerContext();
+	const { usersData } = useUserContext();
 	const { payoutsData } = usePayoutContext();
 	const searchParams = useSearchParams();
 	const id = searchParams.get('id');
@@ -67,7 +64,7 @@ export default function EditPage() {
 				},
 				amount: Number(values.amount),
 				status: values.status,
-				requestedAt: new Date(),
+				requestedAt: new Date(), // Set the requested date to now
 			};
 			await putPayout(data);
 			toast.success('Payout updated successfully.');
@@ -111,7 +108,7 @@ export default function EditPage() {
 													<SelectValue placeholder="Select owner" />
 												</SelectTrigger>
 												<SelectContent>
-													{customersData?.map((user: any) => (
+													{usersData?.map((user: any) => (
 														<SelectItem
 															key={user.id}
 															value={user.id.toString()}

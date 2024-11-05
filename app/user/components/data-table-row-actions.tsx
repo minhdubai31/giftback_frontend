@@ -12,22 +12,22 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { customerSchema } from '../data/schema';
+import { userSchema } from '../data/schema';
 import Link from 'next/link';
-import { useCustomerContext } from '@/context/customerContext';
+import { useUserContext } from '@/context/userContext';
 
 interface DataTableRowActionsProps<TData> {
 	row: Row<TData>;
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-	const { setSelected, setShowConfirm } = useCustomerContext();
+	const { setSelected, setShowConfirm } = useUserContext();
 	const onDeleteSelect = (id: number) => {
 		setSelected(id);
 		setShowConfirm(true);
 	};
 
-	const customer = customerSchema.parse(row.original);
+	const user = userSchema.parse(row.original);
 
 	return (
 		<DropdownMenu>
@@ -40,14 +40,14 @@ export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TDa
 			<DropdownMenuContent align="end" className="w-[160px]">
 				<Link
 					href={{
-						pathname: '/customer/edit',
-						query: { id: customer.id },
+						pathname: '/user/edit',
+						query: { id: user.id },
 					}}
 				>
 					<DropdownMenuItem>Edit</DropdownMenuItem>
 				</Link>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem onClick={() => onDeleteSelect(customer.id)}>
+				<DropdownMenuItem onClick={() => onDeleteSelect(user.id)}>
 					Delete
 				</DropdownMenuItem>
 			</DropdownMenuContent>

@@ -10,17 +10,15 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
-import { Customer } from '../data/schema';
+import { User } from '../data/schema'; 
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { ArrowLeft } from 'lucide-react';
-import { useCustomerContext } from '@/context/customerContext';
+import { useUserContext } from '@/context/userContext'; 
 import { useRouter, useSearchParams } from 'next/navigation';
-import { putCustomer } from '@/services/customerService';
+import { putUser } from '@/services/userService'; 
 import { toast } from 'sonner';
-import { time } from 'console';
-import { Textarea } from '@/components/ui/textarea';
 import {
 	Select,
 	SelectContent,
@@ -28,9 +26,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { Group, groupSchema } from '@/app/group/data/schema'; // Changed from Brand to Group
-import { useGroupContext } from '@/context/groupContext'; // Changed from useBrandContext to useGroupContext
-import { getGroup } from '@/services/groupService'; // Changed from getBrand to getGroup
+import { getGroup } from '@/services/groupService'; 
 
 const formSchema = z.object({
 	id: z.number(),
@@ -48,12 +44,12 @@ const formSchema = z.object({
 let groupsData: any = [];
 
 export default function EditPage() {
-	getGroup(); // Changed from getBrand to getGroup
+	getGroup(); // Fetches the group data for selection
 	const router = useRouter();
-	const { customersData } = useCustomerContext();
+	const { usersData } = useUserContext(); 
 	const searchParams = useSearchParams();
 	const id = searchParams.get('id');
-	const data: Customer = customersData?.find((item: Customer) => item.id.toString() == id);
+	const data: User = usersData?.find((item: User) => item.id.toString() == id); 
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -73,7 +69,7 @@ export default function EditPage() {
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			const data: Customer = {
+			const data: User = { 
 				id: values.id,
 				username: values.username,
 				name: values.name,
@@ -94,8 +90,8 @@ export default function EditPage() {
 					balance: Number(values.wallet)
 				}
 			};
-			await putCustomer(data);
-			toast.success('Customer updated successfully.');
+			await putUser(data); 
+			toast.success('User updated successfully.'); 
 			router.back();
 		} catch (error) {
 			toast.error('Uh oh! Something went wrong.', {
@@ -220,7 +216,7 @@ export default function EditPage() {
 									</FormItem>
 								)}
 							/>
-														<FormField
+							<FormField
 								control={form.control}
 								name="wallet"
 								render={({ field }) => (

@@ -8,38 +8,22 @@ import {
 	FormMessage,
 	Form,
 } from '@/components/ui/form';
-import { Input } from '@/components/ui/input';
 import { z } from 'zod';
-import { Notification } from '../data/schema'; // Changed from Group to Notification
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { ArrowLeft } from 'lucide-react';
-import { useNotificationContext } from '@/context/notificationContext'; // Changed from useGroupContext to useNotificationContext
 import { useRouter, useSearchParams } from 'next/navigation';
-import { putNotification } from '@/services/notificationService'; // Changed from putGroup to putNotification
+import { putNotification } from '@/services/notificationService'; 
 import { toast } from 'sonner';
-
-import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@/components/ui/select';
-import { Customer, customerSchema } from '@/app/customer/data/schema'; // Changed from Brand to Customer
-import { useCustomerContext } from '@/context/customerContext'; // Changed from useBrandContext to useCustomerContext
-import { getCustomers } from '@/services/customerService'; // Changed from getBrand to getCustomer
 import { Textarea } from '@/components/ui/textarea';
 
 const formSchema = z.object({
 	message: z.string().min(5, "Please enter at least 5 characters")
 });
 
-
 export default function EditPage() {
 	const router = useRouter();
-	const searchParams = useSearchParams();
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -48,10 +32,11 @@ export default function EditPage() {
 		},
 	});
 
+	// Handles form submission and sends the notification
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
-			await putNotification(values.message); // Changed from putGroup to putNotification
-			toast.success('Notification sent successfully.'); // Changed message to reflect notification
+			await putNotification(values.message); 
+			toast.success('Notification sent successfully.'); 
 			router.back();
 		} catch (error) {
 			toast.error('Uh oh! Something went wrong.', {

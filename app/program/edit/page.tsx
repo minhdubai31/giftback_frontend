@@ -27,17 +27,15 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@/components/ui/select';
-import { Brand } from '@/app/brand/data/schema';
-import { useBrandContext } from '@/context/brandContext';
-import { getBrand } from '@/services/brandService';
-import { getAffiliateNetwork } from '@/services/networkService';
 import { useNetworkContext } from '@/context/networkContext';
 import { AffiliateNetwork } from '@/app/network/data/schema';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
+import { getAffiliateNetwork } from '@/services/networkService';
 
+// Schema for form validation
 const formSchema = z.object({
 	id: z.number(),
 	brandId: z.string(),
@@ -51,6 +49,7 @@ const formSchema = z.object({
 });
 
 export default function EditPage() {
+	// Fetch affiliate networks
 	getAffiliateNetwork();
 	const router = useRouter();
 	const { programsData } = useProgramContext();
@@ -270,6 +269,7 @@ export default function EditPage() {
 																mode="single"
 																selected={field.value}
 																onSelect={field.onChange}
+																// Disable dates that are before the validFrom date
 																disabled={(date) =>
 																	date < form.getValues("validFrom")
 																}

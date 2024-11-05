@@ -1,11 +1,11 @@
-import { customerSchema } from '@/app/customer/data/schema';
+import { userSchema } from '@/app/user/data/schema';
 import { affiliateProgramSchema } from '@/app/program/data/schema';
 import { dateStringToDate } from '@/constant/common';
 import { z } from 'zod';
 
 export const transactionSchema = z.object({
 	id: z.number(),
-	user: customerSchema.nullable().optional(),
+	user: userSchema.nullable().optional(),
 	program: affiliateProgramSchema.nullable().optional(),
 	totalAmount: z.number().nullable().optional(),
 	cashbackAmount: z.number().nullable().optional(),

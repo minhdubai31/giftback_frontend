@@ -158,16 +158,16 @@ export default function Layout({
 								Transaction
 							</Link>
 							<Link
-								href="/customer"
+								href="/user"
 								className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
-									tab === 'Customers'
+									tab === 'Users'
 										? 'bg-muted text-primary'
 										: 'text-muted-foreground'
 								} transition-all hover:text-primary`}
-								onClick={() => handleTabClick('Customers')}
+								onClick={() => handleTabClick('Users')}
 							>
 								<User className="h-4 w-4" />
-								Customer
+								User
 							</Link>
 							<Link
 								href="/group"
@@ -299,16 +299,16 @@ export default function Layout({
 									Transaction
 								</Link>
 								<Link
-									href="/customer"
+									href="/user"
 									className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${
-										tab === 'Customers'
+										tab === 'Users'
 											? 'bg-muted text-foreground'
 											: 'text-muted-foreground'
 									} hover:text-foreground`}
-									onClick={() => handleTabClick('Customers')}
+									onClick={() => handleTabClick('Users')}
 								>
 									<User className="h-5 w-5" />
-									Customer
+									User
 								</Link>
 								<Link
 									href="/group"

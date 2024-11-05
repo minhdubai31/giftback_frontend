@@ -2,7 +2,7 @@ import { z } from 'zod';
 import { walletSchema } from '../wallet/schema';
 import { dateStringToDate } from '@/constant/common';
 
-export const customerSchema = z.object({
+export const userSchema = z.object({
 	id: z.number(),
 	username: z.string().nullable().optional(),
 	name: z.string().nullable().optional(),
@@ -24,4 +24,4 @@ export const customerSchema = z.object({
 	password: z.string().nullable().optional()
 });
 
-export type Customer = z.infer<typeof customerSchema>;
+export type User = z.infer<typeof userSchema>;

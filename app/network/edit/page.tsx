@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { z } from 'zod';
-import { AffiliateNetwork, affiliateNetworkSchema } from '../data/schema';
+import { AffiliateNetwork } from '../data/schema';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
@@ -38,6 +38,7 @@ export default function EditPage() {
 	const { networksData } = useNetworkContext();
 	const searchParams = useSearchParams();
 	const id = searchParams.get('id');
+	// Find the network data based on the ID from the search parameters
 	const data = networksData?.find((item: AffiliateNetwork) => item.id.toString() == id);
 
 	const form = useForm<z.infer<typeof formSchema>>({

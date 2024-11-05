@@ -3,8 +3,8 @@
 import { useGlobalContext } from '@/context/globalContext';
 import { columns } from './components/columns';
 import { DataTable } from './components/data-table';
-import { useGroupContext } from '@/context/groupContext';
-import { deleteGroup, GET_API_URL, getGroup } from '@/services/groupService';
+import { useUserContext } from '@/context/userContext';
+import { deleteUser, GET_API_URL, getUsers } from '@/services/userService';
 import { useEffect } from 'react';
 import {
 	AlertDialogHeader,
@@ -22,17 +22,17 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import { mutate } from 'swr';
 
-export default function GroupPage() {
-	getGroup();
+export default function UserPage() {
+	getUsers();
 	const { setTab } = useGlobalContext();
-	const { groupsData, selected, showConfirm, setShowConfirm } = useGroupContext();
-	const groupList = groupsData ?? [];
+	const { usersData, selected, showConfirm, setShowConfirm } = useUserContext();
+	const userList = usersData ?? [];
 
 	const onDeleteConfirmed = async () => {
 		try {
-			await deleteGroup(selected);
+			await deleteUser(selected);
 			mutate(GET_API_URL);
-			toast.success('Group deleted successfully.');
+			toast.success('User deleted successfully.');
 		} catch (error) {
 			toast.error('Uh oh! Something went wrong.', {
 				description: axios.isAxiosError(error)
@@ -43,7 +43,7 @@ export default function GroupPage() {
 	}
 
 	useEffect(() => {
-		setTab('Group');
+		setTab('Users');
 	}, []);
 
 	return (
@@ -68,7 +68,7 @@ export default function GroupPage() {
 				</AlertDialogContent>
 			</AlertDialog>
 			<div className="h-full flex-1 flex-col space-y-8 p-2 md:flex">
-				<DataTable data={groupList} columns={columns} />
+				<DataTable data={userList} columns={columns} />
 			</div>
 		</>
 	);
