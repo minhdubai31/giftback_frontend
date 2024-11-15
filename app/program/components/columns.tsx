@@ -56,9 +56,9 @@ export const columns: ColumnDef<AffiliateProgram>[] = [
 		cell: ({ row }) => {
 			return (
 				<div className="flex space-x-2">
-					<span className="max-w-[200px] truncate text-ellipsis line-clamp-3 font-medium">
-						<div dangerouslySetInnerHTML={{ __html: row.getValue('terms') }} />
-					</span>
+					<p className="max-w-[200px] text-ellipsis line-clamp-5 font-medium">
+						{row.getValue('terms')}
+					</p>
 				</div>
 			);
 		},
@@ -72,7 +72,7 @@ export const columns: ColumnDef<AffiliateProgram>[] = [
 				<div className="flex space-x-2">
 					<span className="max-w-fit truncate text-ellipsis font-medium">
 						{row.original.validFrom?.toLocaleDateString()} -{' '}
-						{row.original.validUntil?.toLocaleDateString() ?? "Unknown"}
+						{row.original.validUntil?.toLocaleDateString() ?? 'Unknown'}
 					</span>
 				</div>
 			);

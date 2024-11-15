@@ -38,14 +38,13 @@ import { getAffiliateNetwork } from '@/services/networkService';
 // Schema for form validation
 const formSchema = z.object({
 	id: z.number(),
-	brandId: z.string(),
 	programName: z.string().min(1, 'This field is required'),
 	commissionRate: z.string().min(1, 'This field is required'),
 	terms: z.string().min(1, 'This field is required'),
 	programUrl: z.string().min(1, 'This field is required'),
 	affiliateNetworkId: z.string(),
-	validFrom: z.date(),
-	validUntil: z.date(),
+	validFrom: z.date().nullable().optional(),
+	validUntil: z.date().nullable().optional(),
 });
 
 export default function EditPage() {
@@ -69,8 +68,8 @@ export default function EditPage() {
 			terms: data?.terms ?? '',
 			programUrl: data?.programUrl ?? '',
 			affiliateNetworkId: data?.affiliateNetwork?.id.toString() ?? '',
-			validFrom: data?.validFrom ?? new Date(),
-			validUntil: data?.validUntil ?? new Date(),
+			validFrom: data?.validFrom ?? undefined,
+			validUntil: data?.validUntil ?? undefined,
 		},
 	});
 

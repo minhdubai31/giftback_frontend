@@ -24,9 +24,13 @@ export const getNotification = () => {
 };
 
 export const putNotification = async (data: string) => {
-	await axios.post(POST_API_URL, data, {
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+	await axios.post(
+		POST_API_URL,
+		{ message: data },
+		{
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
 };
