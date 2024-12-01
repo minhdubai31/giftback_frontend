@@ -29,6 +29,7 @@ import {
 } from '@/components/ui/select';
 import { useUserContext } from '@/context/userContext'; 
 import { getUsers } from '@/services/userService'; 
+import { User } from '@/app/user/data/schema';
 
 const formSchema = z.object({
 	id: z.number(),
@@ -110,7 +111,7 @@ export default function EditPage() {
 													<SelectValue placeholder="Select owner" />
 												</SelectTrigger>
 												<SelectContent>
-													{usersData?.map((user: any) => (
+													{usersData?.map((user: User) => (
 														<SelectItem
 															key={user.id}
 															value={user.id.toString()}

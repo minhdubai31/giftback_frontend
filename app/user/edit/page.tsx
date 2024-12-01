@@ -60,7 +60,7 @@ export default function EditPage() {
 			role: data?.role ?? '',
 			groupId: data?.group?.id?.toString() ?? '',
 			walletId: data?.wallet?.id,
-			wallet: data?.wallet?.balance?.toString(),
+			wallet: data?.wallet?.balance?.toString() ?? '',
 			password: id ? 'default' : '',
 			bankName: data?.bankName ?? '',
 			bankAccountNumber: data?.bankAccountNumber ?? '',

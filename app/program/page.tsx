@@ -23,7 +23,7 @@ import axios from 'axios';
 import { mutate } from 'swr';
 import { getBrand } from '@/services/brandService';
 
-export default function programPage() {
+export default function ProgramPage() {
 	getAffiliateProgram();
 	getBrand();
 	const { setTab } = useGlobalContext();

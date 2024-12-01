@@ -22,7 +22,7 @@ import axios from 'axios';
 import { mutate } from 'swr';
 import { usePayoutContext } from '@/context/payoutContext';
 
-export default function payoutPage() {
+export default function PayoutPage() {
 	getPayout();
 	const { setTab } = useGlobalContext();
 	const { payoutsData, selected, showConfirm, setShowConfirm, showUpdateConfirm, setShowUpdateConfirm } = usePayoutContext();

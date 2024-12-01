@@ -1,7 +1,7 @@
+'use client'
+import { useRouter } from "next/navigation"
+
 export default function Dashboard () {
-  return (
-    <>
-      Dashboard
-    </>
-  )
+  const router = useRouter()
+  router.push("/network")
 }

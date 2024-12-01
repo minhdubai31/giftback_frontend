@@ -22,7 +22,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import { mutate } from 'swr';
 
-export default function cashbackPage() {
+export default function CashbackPage() {
 	getCashback();
 	const { setTab } = useGlobalContext();
 	const { cashbacksData, selected, showConfirm, setShowConfirm } = useCashbackContext();

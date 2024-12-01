@@ -22,7 +22,7 @@ import axios from 'axios';
 import { mutate } from 'swr';
 import { useTransactionContext } from '@/context/transactionContext';
 
-export default function transactionPage() {
+export default function TransactionPage() {
 	getTransaction();
 	const { setTab } = useGlobalContext();
 	const { transactionsData, selected, showConfirm, setShowConfirm } = useTransactionContext();

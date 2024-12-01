@@ -22,7 +22,7 @@ import { toast } from 'sonner';
 import axios from 'axios';
 import { mutate } from 'swr';
 
-export default function networkPage() {
+export default function NetworkPage() {
 	getAffiliateNetwork();
 	const { setTab } = useGlobalContext();
 	const { networksData, selected, showConfirm, setShowConfirm } = useNetworkContext();

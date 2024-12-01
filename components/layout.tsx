@@ -61,7 +61,7 @@ export default function Layout({
 					</div>
 					<div className="flex-1">
 						<nav className="grid items-start px-2 text-sm font-medium lg:px-4">
-							<Link
+							{/* <Link
 								href="/"
 								className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
 									tab === 'Dashboard'
@@ -72,7 +72,7 @@ export default function Layout({
 							>
 								<Home className="h-4 w-4" />
 								Dashboard
-							</Link>
+							</Link> */}
 							<Link
 								href="/network"
 								className={`flex items-center gap-3 rounded-lg px-3 py-2 ${
@@ -202,7 +202,7 @@ export default function Layout({
 								>
 									<span className="text-2xl">Giftback</span>
 								</Link>
-								<Link
+								{/* <Link
 									href="/"
 									className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl px-3 py-2 ${
 										tab === 'Dashboard'
@@ -213,7 +213,7 @@ export default function Layout({
 								>
 									<Home className="h-5 w-5" />
 									Dashboard
-								</Link>
+								</Link> */}
 								<Link
 									href="/network"
 									className={`mx-[-0.65rem] flex items-center gap-4 rounded-xl ${

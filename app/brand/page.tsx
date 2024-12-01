@@ -22,7 +22,7 @@ import axios from 'axios';
 import { mutate } from 'swr';
 import { useBrandContext } from '@/context/brandContext';
 
-export default function brandPage() {
+export default function BrandPage() {
 	getBrand();
 	const { setTab } = useGlobalContext();
 	const { brandsData, selected, showConfirm, setShowConfirm } = useBrandContext();
