@@ -94,29 +94,6 @@ export const columns: ColumnDef<Transaction>[] = [
 		},
 	},
 	{
-		accessorKey: 'productInformation',
-		header: ({ column }) => (
-			<DataTableColumnHeader column={column} title="Product information" />
-		),
-		meta: 'Product information',
-		cell: ({ row }) => {
-			return (
-				<div className="flex space-x-2">
-					<span className="max-w-[150px] truncate text-ellipsis font-medium">
-						<span>{row.original.productName}</span>
-						<img
-							src={
-								row.original.productImage ||
-								'https://placehold.co/50x50?text=No%20image'
-							}
-							alt={row.original.productName || ''}
-						/>
-					</span>
-				</div>
-			);
-		},
-	},
-	{
 		id: 'actions',
 		cell: ({ row }) => <DataTableRowActions row={row} />,
 	},

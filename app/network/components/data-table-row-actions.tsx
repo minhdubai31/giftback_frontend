@@ -21,10 +21,10 @@ interface DataTableRowActionsProps<TData> {
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-	const { setSelected, setShowConfirm } = useNetworkContext();
+	const { SetSelected, SetShowConfirm } = useNetworkContext();
 	const onDeleteSelect = (id: number) => {
-		setSelected(id);
-		setShowConfirm(true);
+		SetSelected(id);
+		SetShowConfirm(true);
 	};
 
 	const affiliateNetwork = affiliateNetworkSchema.parse(row.original);

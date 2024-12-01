@@ -27,7 +27,7 @@ export default function ProgramPage() {
 	getAffiliateProgram();
 	getBrand();
 	const { setTab } = useGlobalContext();
-	const { programsData, selected, showConfirm, setShowConfirm } = useProgramContext();
+	const { programsData, selected, showConfirm, SetShowConfirm } = useProgramContext();
 	const affiliatePrograms = programsData ?? [];
 
 	const onDeleteConfirmed = async () => {
@@ -50,7 +50,7 @@ export default function ProgramPage() {
 
 	return (
 		<>
-			<AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+			<AlertDialog open={showConfirm} onOpenChange={SetShowConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

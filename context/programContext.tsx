@@ -17,11 +17,11 @@ export interface ContextProviderProps {
 
 export const ProgramContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
 	const [programsData, setProgramsData] = useState<object | undefined>(undefined);
-	const [selected, setSelected] = useState<number | undefined>(undefined);
-	const [showConfirm, setShowConfirm] = useState<boolean | undefined>(false);
+	const [selected, SetSelected] = useState<number | undefined>(undefined);
+	const [showConfirm, SetShowConfirm] = useState<boolean | undefined>(false);
 
 	return (
-		<ProgramContext.Provider value={{ programsData, setProgramsData, selected, setSelected, showConfirm, setShowConfirm }}>
+		<ProgramContext.Provider value={{ programsData, setProgramsData, selected, SetSelected, showConfirm, SetShowConfirm }}>
 			{children}
 		</ProgramContext.Provider>
 	);

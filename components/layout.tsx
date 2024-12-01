@@ -2,11 +2,8 @@
 
 import Link from 'next/link';
 import {
-	CircleUser,
-	Home,
 	Menu,
 	Package2,
-	Search,
 	Users,
 	Globe,
 	SquareCode,
@@ -20,18 +17,8 @@ import {
 import { useState } from 'react';
 
 import { Button } from '@/components/ui/button';
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
-	DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { useGlobalContext } from '@/context/globalContext';
-import { Accordion, AccordionItem } from './ui/accordion';
 
 export const description =
 	'A products dashboard with a sidebar navigation and a main content area. The dashboard has a header with a search input and a user menu. The sidebar has a logo, navigation links, and a card with a call to action. The main content area shows an empty state with a call to action.';

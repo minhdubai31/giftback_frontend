@@ -21,10 +21,10 @@ interface DataTableRowActionsProps<TData> {
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-	const { setSelected, setShowConfirm } = useUserContext();
+	const { SetSelected, SetShowConfirm } = useUserContext();
 	const onDeleteSelect = (id: number) => {
-		setSelected(id);
-		setShowConfirm(true);
+		SetSelected(id);
+		SetShowConfirm(true);
 	};
 
 	const user = userSchema.parse(row.original);

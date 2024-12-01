@@ -27,6 +27,9 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { getGroup } from '@/services/groupService'; 
+import { Group } from '@/app/group/data/schema';
+import { useGroupContext } from '@/context/groupContext';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
 	id: z.number(),
@@ -41,12 +44,11 @@ const formSchema = z.object({
 	bankAccountNumber: z.string(),
 });
 
-let groupsData: any = [];
-
-export default function EditPage() {
+function EditPage() {
 	getGroup(); // Fetches the group data for selection
 	const router = useRouter();
 	const { usersData } = useUserContext(); 
+	const { groupsData } = useGroupContext();
 	const searchParams = useSearchParams();
 	const id = searchParams.get('id');
 	const data: User = usersData?.find((item: User) => item.id.toString() == id); 
@@ -132,7 +134,7 @@ export default function EditPage() {
 													<SelectValue placeholder="Select group" />
 												</SelectTrigger>
 												<SelectContent>
-													{groupsData?.map((group: any) => (
+													{groupsData?.map((group: Group) => (
 														<SelectItem
 															key={group.id}
 															value={group.id.toString()}
@@ -237,3 +239,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

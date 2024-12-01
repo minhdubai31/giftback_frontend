@@ -25,7 +25,7 @@ import { useBrandContext } from '@/context/brandContext';
 export default function BrandPage() {
 	getBrand();
 	const { setTab } = useGlobalContext();
-	const { brandsData, selected, showConfirm, setShowConfirm } = useBrandContext();
+	const { brandsData, selected, showConfirm, SetShowConfirm } = useBrandContext();
 	const brands = brandsData ?? [];
 
 	const onDeleteConfirmed = async () => {
@@ -48,7 +48,7 @@ export default function BrandPage() {
 
 	return (
 		<>
-			<AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+			<AlertDialog open={showConfirm} onOpenChange={SetShowConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

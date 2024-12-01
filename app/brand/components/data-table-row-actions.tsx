@@ -21,10 +21,10 @@ interface DataTableRowActionsProps<TData> {
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-	const { setSelected, setShowConfirm } = useBrandContext();
+	const { SetSelected, SetShowConfirm } = useBrandContext();
 	const onDeleteSelect = (id: number) => {
-		setSelected(id);
-		setShowConfirm(true);
+		SetSelected(id);
+		SetShowConfirm(true);
 	};
 
 	const brand = brandSchema.parse(row.original);

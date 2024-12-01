@@ -19,10 +19,10 @@ interface DataTableRowActionsProps<TData> {
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-	const { setSelected, setShowConfirm } = usePayoutContext();
+	const { SetSelected, SetShowConfirm } = usePayoutContext();
 	const onDeleteSelect = (id: number) => {
-		setSelected(id);
-		setShowConfirm(true);
+		SetSelected(id);
+		SetShowConfirm(true);
 	};
 
 	const payout = payoutSchema.parse(row.original);

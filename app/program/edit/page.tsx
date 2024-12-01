@@ -34,6 +34,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { getAffiliateNetwork } from '@/services/networkService';
+import { Suspense } from 'react';
 
 // Schema for form validation
 const formSchema = z.object({
@@ -47,7 +48,7 @@ const formSchema = z.object({
 	validUntil: z.date().nullable().optional(),
 });
 
-export default function EditPage() {
+function EditPage() {
 	// Fetch affiliate networks
 	getAffiliateNetwork();
 	const router = useRouter();
@@ -220,7 +221,7 @@ export default function EditPage() {
 														>
 															<Calendar
 																mode="single"
-																selected={field.value}
+																selected={field.value || undefined}
 																onSelect={field.onChange}
 																initialFocus
 															/>
@@ -266,12 +267,16 @@ export default function EditPage() {
 														>
 															<Calendar
 																mode="single"
-																selected={field.value}
+																selected={field.value || undefined}
 																onSelect={field.onChange}
 																// Disable dates that are before the validFrom date
-																disabled={(date) =>
-																	date < form.getValues("validFrom")
-																}
+																disabled={(date) => {
+																	const validFrom =
+																		form.getValues('validFrom');
+																	return validFrom
+																		? date < validFrom
+																		: false;
+																}}
 																initialFocus
 															/>
 														</PopoverContent>
@@ -304,3 +309,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

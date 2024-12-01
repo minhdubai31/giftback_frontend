@@ -17,11 +17,11 @@ export interface ContextProviderProps {
 
 export const BrandContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
 	const [brandsData, setBrandsData] = useState<object | undefined>(undefined);
-	const [selected, setSelected] = useState<number | undefined>(undefined);
-	const [showConfirm, setShowConfirm] = useState<boolean | undefined>(false);
+	const [selected, SetSelected] = useState<number | undefined>(undefined);
+	const [showConfirm, SetShowConfirm] = useState<boolean | undefined>(false);
 
 	return (
-		<BrandContext.Provider value={{ brandsData, setBrandsData, selected, setSelected, showConfirm, setShowConfirm }}>
+		<BrandContext.Provider value={{ brandsData, setBrandsData, selected, SetSelected, showConfirm, SetShowConfirm }}>
 			{children}
 		</BrandContext.Provider>
 	);

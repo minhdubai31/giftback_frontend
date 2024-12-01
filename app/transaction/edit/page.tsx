@@ -36,6 +36,7 @@ import { useProgramContext } from '@/context/programContext';
 import { getAffiliateProgram } from '@/services/programService';
 import { User } from '@/app/user/data/schema';
 import { AffiliateProgram } from '@/app/program/data/schema';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
 	id: z.number(),
@@ -46,7 +47,7 @@ const formSchema = z.object({
 	transactionDate: z.date(),
 });
 
-export default function EditPage() {
+function EditPage() {
 	getUsers(); // Fetch users for the select input
 	getAffiliateProgram(); // Fetch affiliate programs for the select input
 	const router = useRouter();
@@ -260,3 +261,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

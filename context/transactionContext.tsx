@@ -17,11 +17,11 @@ export interface ContextProviderProps {
 
 export const TransactionContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
 	const [transactionsData, setTransactionsData] = useState<object | undefined>(undefined);
-	const [selected, setSelected] = useState<number | undefined>(undefined);
-	const [showConfirm, setShowConfirm] = useState<boolean | undefined>(false);
+	const [selected, SetSelected] = useState<number | undefined>(undefined);
+	const [showConfirm, SetShowConfirm] = useState<boolean | undefined>(false);
 
 	return (
-		<TransactionContext.Provider value={{ transactionsData, setTransactionsData, selected, setSelected, showConfirm, setShowConfirm }}>
+		<TransactionContext.Provider value={{ transactionsData, setTransactionsData, selected, SetSelected, showConfirm, SetShowConfirm }}>
 			{children}
 		</TransactionContext.Provider>
 	);

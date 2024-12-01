@@ -17,11 +17,11 @@ export interface ContextProviderProps {
 
 export const NotificationContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
 	const [notificationsData, setNotificationsData] = useState<object | undefined>(undefined);
-	const [selected, setSelected] = useState<number | undefined>(undefined);
-	const [showConfirm, setShowConfirm] = useState<boolean | undefined>(false);
+	const [selected, SetSelected] = useState<number | undefined>(undefined);
+	const [showConfirm, SetShowConfirm] = useState<boolean | undefined>(false);
 
 	return (
-		<NotificationContext.Provider value={{ notificationsData, setNotificationsData, selected, setSelected, showConfirm, setShowConfirm }}>
+		<NotificationContext.Provider value={{ notificationsData, setNotificationsData, selected, SetSelected, showConfirm, SetShowConfirm }}>
 			{children}
 		</NotificationContext.Provider>
 	);

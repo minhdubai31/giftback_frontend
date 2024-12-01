@@ -17,12 +17,12 @@ export interface ContextProviderProps {
 
 export const CashbackContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
 	const [cashbacksData, setCashbacksData] = useState<object | undefined>(undefined);
-	const [selected, setSelected] = useState<number | undefined>(undefined);
-	const [showConfirm, setShowConfirm] = useState<boolean | undefined>(false);
-	const [showUpdateConfirm, setShowUpdateConfirm] = useState<boolean | undefined>(false); // Added showUpdateConfirm
+	const [selected, SetSelected] = useState<number | undefined>(undefined);
+	const [showConfirm, SetShowConfirm] = useState<boolean | undefined>(false);
+	const [showUpdateConfirm, SetShowUpdateConfirm] = useState<boolean | undefined>(false); // Added showUpdateConfirm
 
 	return (
-		<CashbackContext.Provider value={{ cashbacksData, setCashbacksData, selected, setSelected, showConfirm, setShowConfirm, showUpdateConfirm, setShowUpdateConfirm }}>
+		<CashbackContext.Provider value={{ cashbacksData, setCashbacksData, selected, SetSelected, showConfirm, SetShowConfirm, showUpdateConfirm, SetShowUpdateConfirm }}>
 			{children}
 		</CashbackContext.Provider>
 	);

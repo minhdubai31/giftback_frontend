@@ -25,7 +25,7 @@ import { useTransactionContext } from '@/context/transactionContext';
 export default function TransactionPage() {
 	getTransaction();
 	const { setTab } = useGlobalContext();
-	const { transactionsData, selected, showConfirm, setShowConfirm } = useTransactionContext();
+	const { transactionsData, selected, showConfirm, SetShowConfirm } = useTransactionContext();
 	const transactions = transactionsData ?? [];
 
 	const onDeleteConfirmed = async () => {
@@ -48,7 +48,7 @@ export default function TransactionPage() {
 
 	return (
 		<>
-			<AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+			<AlertDialog open={showConfirm} onOpenChange={SetShowConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

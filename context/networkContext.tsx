@@ -17,11 +17,11 @@ export interface ContextProviderProps {
 
 export const NetworkContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
 	const [networksData, setNetworksData] = useState<object | undefined>(undefined);
-	const [selected, setSelected] = useState<number | undefined>(undefined);
-	const [showConfirm, setShowConfirm] = useState<boolean | undefined>(false);
+	const [selected, SetSelected] = useState<number | undefined>(undefined);
+	const [showConfirm, SetShowConfirm] = useState<boolean | undefined>(false);
 
 	return (
-		<NetworkContext.Provider value={{ networksData, setNetworksData, selected, setSelected, showConfirm, setShowConfirm }}>
+		<NetworkContext.Provider value={{ networksData, setNetworksData, selected, SetSelected, showConfirm, SetShowConfirm }}>
 			{children}
 		</NetworkContext.Provider>
 	);

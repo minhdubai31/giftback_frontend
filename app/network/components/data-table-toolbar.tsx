@@ -7,20 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { DataTableViewOptions } from '@/app/network/components/data-table-view-options';
 
-import { statuses } from '../data/data';
-import { DataTableFacetedFilter } from './data-table-faceted-filter';
 import { PlusCircle } from 'lucide-react';
-import {
-	Sheet,
-	SheetClose,
-	SheetContent,
-	SheetDescription,
-	SheetFooter,
-	SheetHeader,
-	SheetTitle,
-	SheetTrigger,
-} from '@/components/ui/sheet';
-import { Label } from '@/components/ui/label';
 import Link from 'next/link';
 
 interface DataTableToolbarProps<TData> {

@@ -21,10 +21,10 @@ interface DataTableRowActionsProps<TData> {
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-	const { setSelected, setShowConfirm } = useGroupContext();
+	const { SetSelected, SetShowConfirm } = useGroupContext();
 	const onDeleteSelect = (id: number) => {
-		setSelected(id);
-		setShowConfirm(true);
+		SetSelected(id);
+		SetShowConfirm(true);
 	};
 
 	const group = groupSchema.parse(row.original);

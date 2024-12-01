@@ -17,12 +17,12 @@ export interface ContextProviderProps {
 
 export const PayoutContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
 	const [payoutsData, setPayoutsData] = useState<object | undefined>(undefined);
-	const [selected, setSelected] = useState<number | undefined>(undefined);
-	const [showConfirm, setShowConfirm] = useState<boolean | undefined>(false);
-	const [showUpdateConfirm, setShowUpdateConfirm] = useState<boolean | undefined>(false); // Added showUpdateConfirm
+	const [selected, SetSelected] = useState<number | undefined>(undefined);
+	const [showConfirm, SetShowConfirm] = useState<boolean | undefined>(false);
+	const [showUpdateConfirm, SetShowUpdateConfirm] = useState<boolean | undefined>(false); // Added showUpdateConfirm
 
 	return (
-		<PayoutContext.Provider value={{ payoutsData, setPayoutsData, selected, setSelected, showConfirm, setShowConfirm, showUpdateConfirm, setShowUpdateConfirm }}>
+		<PayoutContext.Provider value={{ payoutsData, setPayoutsData, selected, SetSelected, showConfirm, SetShowConfirm, showUpdateConfirm, SetShowUpdateConfirm }}>
 			{children}
 		</PayoutContext.Provider>
 	);

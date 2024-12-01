@@ -13,11 +13,11 @@ export function useUserContext(): any {
 
 export const UserContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [usersData, setUsersData] = useState<object | undefined>(undefined);
-    const [selected, setSelected] = useState<number | undefined>(undefined);
-    const [showConfirm, setShowConfirm] = useState<boolean | undefined>(false);
+    const [selected, SetSelected] = useState<number | undefined>(undefined);
+    const [showConfirm, SetShowConfirm] = useState<boolean | undefined>(false);
 
     return (
-        <UserContext.Provider value={{ usersData, setUsersData, selected, setSelected, showConfirm, setShowConfirm }}>
+        <UserContext.Provider value={{ usersData, setUsersData, selected, SetSelected, showConfirm, SetShowConfirm }}>
             {children}
         </UserContext.Provider>
     );

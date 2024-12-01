@@ -25,7 +25,7 @@ import { usePayoutContext } from '@/context/payoutContext';
 export default function PayoutPage() {
 	getPayout();
 	const { setTab } = useGlobalContext();
-	const { payoutsData, selected, showConfirm, setShowConfirm, showUpdateConfirm, setShowUpdateConfirm } = usePayoutContext();
+	const { payoutsData, selected, showConfirm, SetShowConfirm, showUpdateConfirm, SetShowUpdateConfirm } = usePayoutContext();
 	const payouts = payoutsData ?? [];
 
 	const onDeleteConfirmed = async () => {
@@ -62,7 +62,7 @@ export default function PayoutPage() {
 
 	return (
 		<>
-			<AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+			<AlertDialog open={showConfirm} onOpenChange={SetShowConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -82,7 +82,7 @@ export default function PayoutPage() {
 				</AlertDialogContent>
 			</AlertDialog>
 
-			<AlertDialog open={showUpdateConfirm} onOpenChange={setShowUpdateConfirm}>
+			<AlertDialog open={showUpdateConfirm} onOpenChange={SetShowUpdateConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Confirm Update</AlertDialogTitle>

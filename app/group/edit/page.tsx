@@ -30,6 +30,7 @@ import {
 import { useUserContext } from '@/context/userContext'; 
 import { getUsers } from '@/services/userService'; 
 import { User } from '@/app/user/data/schema';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
 	id: z.number(),
@@ -38,7 +39,7 @@ const formSchema = z.object({
 	ownerId: z.string(),
 });
 
-export default function EditPage() {
+function EditPage() {
 	getUsers(); // Fetch users for the owner selection
 	const router = useRouter();
 	const { groupsData } = useGroupContext();
@@ -160,3 +161,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

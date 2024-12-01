@@ -28,6 +28,8 @@ import {
 } from '@/components/ui/select';
 import { useUserContext } from '@/context/userContext';
 import { getUsers } from '@/services/userService';
+import { User } from '@/app/user/data/schema';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
 	id: z.number(),
@@ -36,7 +38,7 @@ const formSchema = z.object({
 	status: z.enum(['PENDING', 'COMPLETED', 'DENIED']).default('PENDING'),
 });
 
-export default function EditPage() {
+function EditPage() {
 	getUsers(); // Fetch users data
 	const router = useRouter();
 	const { usersData } = useUserContext();
@@ -108,7 +110,7 @@ export default function EditPage() {
 													<SelectValue placeholder="Select owner" />
 												</SelectTrigger>
 												<SelectContent>
-													{usersData?.map((user: any) => (
+													{usersData?.map((user: User) => (
 														<SelectItem
 															key={user.id}
 															value={user.id.toString()}
@@ -171,3 +173,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

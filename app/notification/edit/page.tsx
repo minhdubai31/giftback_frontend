@@ -17,12 +17,13 @@ import { useRouter } from 'next/navigation';
 import { putNotification } from '@/services/notificationService'; 
 import { toast } from 'sonner';
 import { Textarea } from '@/components/ui/textarea';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
 	message: z.string().min(5, "Please enter at least 5 characters")
 });
 
-export default function EditPage() {
+function EditPage() {
 	const router = useRouter();
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -83,3 +84,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

@@ -25,7 +25,7 @@ import { mutate } from 'swr';
 export default function CashbackPage() {
 	getCashback();
 	const { setTab } = useGlobalContext();
-	const { cashbacksData, selected, showConfirm, setShowConfirm } = useCashbackContext();
+	const { cashbacksData, selected, showConfirm, SetShowConfirm } = useCashbackContext();
 	const cashbackItems = cashbacksData ?? [];
 
 	const onDeleteConfirmed = async () => {
@@ -48,7 +48,7 @@ export default function CashbackPage() {
 
 	return (
 		<>
-			<AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+			<AlertDialog open={showConfirm} onOpenChange={SetShowConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

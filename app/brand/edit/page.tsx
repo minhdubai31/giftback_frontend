@@ -20,6 +20,7 @@ import { toast } from 'sonner';
 import { useBrandContext } from '@/context/brandContext';
 import { putBrand } from '@/services/brandService';
 import { Textarea } from '@/components/ui/textarea';
+import { Suspense } from 'react';
 
 // Define the form schema for validation
 const formSchema = z.object({
@@ -29,7 +30,7 @@ const formSchema = z.object({
 	logoPath: z.string(),
 });
 
-export default function EditPage() {
+function EditPage() {
 	const router = useRouter();
 	const { brandsData } = useBrandContext();
 	const searchParams = useSearchParams();
@@ -124,3 +125,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

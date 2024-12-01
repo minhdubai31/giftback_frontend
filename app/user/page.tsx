@@ -25,7 +25,7 @@ import { mutate } from 'swr';
 export default function UserPage() {
 	getUsers();
 	const { setTab } = useGlobalContext();
-	const { usersData, selected, showConfirm, setShowConfirm } = useUserContext();
+	const { usersData, selected, showConfirm, SetShowConfirm } = useUserContext();
 	const userList = usersData ?? [];
 
 	const onDeleteConfirmed = async () => {
@@ -48,7 +48,7 @@ export default function UserPage() {
 
 	return (
 		<>
-			<AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+			<AlertDialog open={showConfirm} onOpenChange={SetShowConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

@@ -23,6 +23,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { cn } from '@/lib/utils';
 import { format } from 'date-fns';
 import { Calendar } from '@/components/ui/calendar';
+import { Suspense } from 'react';
 
 // Define the form schema for validation
 const formSchema = z.object({
@@ -32,7 +33,7 @@ const formSchema = z.object({
 	earnedAt: z.date(),
 });
 
-export default function EditPage() {
+function EditPage() {
 	const router = useRouter();
 	const { cashbacksData } = useCashbackContext();
 	const searchParams = useSearchParams();
@@ -172,3 +173,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

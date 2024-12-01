@@ -172,12 +172,12 @@ function toast({ ...props }: Toast) {
 }
 
 function useToast() {
-  const [state, setState] = React.useState<State>(memoryState)
+  const [state, SetState] = React.useState<State>(memoryState)
 
   React.useEffect(() => {
-    listeners.push(setState)
+    listeners.push(SetState)
     return () => {
-      const index = listeners.indexOf(setState)
+      const index = listeners.indexOf(SetState)
       if (index > -1) {
         listeners.splice(index, 1)
       }

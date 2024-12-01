@@ -25,7 +25,7 @@ import { mutate } from 'swr';
 export default function GroupPage() {
 	getGroup();
 	const { setTab } = useGlobalContext();
-	const { groupsData, selected, showConfirm, setShowConfirm } = useGroupContext();
+	const { groupsData, selected, showConfirm, SetShowConfirm } = useGroupContext();
 	const groupList = groupsData ?? [];
 
 	const onDeleteConfirmed = async () => {
@@ -48,7 +48,7 @@ export default function GroupPage() {
 
 	return (
 		<>
-			<AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+			<AlertDialog open={showConfirm} onOpenChange={SetShowConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

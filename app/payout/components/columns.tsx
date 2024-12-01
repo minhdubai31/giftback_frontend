@@ -85,7 +85,7 @@ export const columns: ColumnDef<Payout>[] = [
 		header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
 		meta: 'Status',
 		cell: ({ row }) => {
-			const { setShowUpdateConfirm, setSelected } = usePayoutContext(); // Moved hook call inside the cell function
+			const { SetShowUpdateConfirm, SetSelected } = usePayoutContext(); // Moved hook call inside the cell function
 			return (
 				<div className="flex space-x-2">
 					<TooltipProvider delayDuration={200}>
@@ -93,8 +93,8 @@ export const columns: ColumnDef<Payout>[] = [
 							<TooltipTrigger asChild={true}>
 								<Button
 									onClick={() => {
-										setSelected(row.original.id);
-										setShowUpdateConfirm(true);
+										SetSelected(row.original.id);
+										SetShowUpdateConfirm(true);
 									}}
 									className={
 										row.getValue('status') === 'PENDING'

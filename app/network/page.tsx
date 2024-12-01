@@ -25,7 +25,7 @@ import { mutate } from 'swr';
 export default function NetworkPage() {
 	getAffiliateNetwork();
 	const { setTab } = useGlobalContext();
-	const { networksData, selected, showConfirm, setShowConfirm } = useNetworkContext();
+	const { networksData, selected, showConfirm, SetShowConfirm } = useNetworkContext();
 	const affiliateNetworks = networksData ?? [];
 
 	const onDeleteConfirmed = async () => {
@@ -48,7 +48,7 @@ export default function NetworkPage() {
 
 	return (
 		<>
-			<AlertDialog open={showConfirm} onOpenChange={setShowConfirm}>
+			<AlertDialog open={showConfirm} onOpenChange={SetShowConfirm}>
 				<AlertDialogContent>
 					<AlertDialogHeader>
 						<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>

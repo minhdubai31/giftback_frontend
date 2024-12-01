@@ -20,6 +20,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { putAffiliateNetwork } from '@/services/networkService';
 import { toast } from 'sonner';
 import { Separator } from '@/components/ui/separator';
+import { Suspense } from 'react';
 
 const formSchema = z.object({
 	id: z.number(),
@@ -33,7 +34,7 @@ const formSchema = z.object({
 	}),
 });
 
-export default function EditPage() {
+function EditPage() {
 	const router = useRouter();
 	const { networksData } = useNetworkContext();
 	const searchParams = useSearchParams();
@@ -174,3 +175,13 @@ export default function EditPage() {
 		</>
 	);
 }
+
+const Page = () => {
+	return (
+		 <Suspense>
+			  <EditPage />
+		 </Suspense>
+	)
+}
+
+export default Page

@@ -19,12 +19,12 @@ interface DataTableRowActionsProps<TData> {
 }
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
-	const { setSelected, setShowConfirm } = useCashbackContext();
+	const { SetSelected, SetShowConfirm } = useCashbackContext();
 
 	// Function to handle delete action selection
 	const onDeleteSelect = (id: number) => {
-		setSelected(id);
-		setShowConfirm(true);
+		SetSelected(id);
+		SetShowConfirm(true);
 	};
 
 	// Parse the original row data to match the cashback schema

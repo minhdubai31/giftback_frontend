@@ -1,4 +1,3 @@
-import { brandSchema } from '@/app/brand/data/schema';
 import { affiliateNetworkSchema } from '@/app/network/data/schema';
 import { dateStringToDate } from '@/constant/common';
 import { z } from 'zod';
